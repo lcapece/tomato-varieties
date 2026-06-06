@@ -197,6 +197,7 @@ function initializeTomatoToy() {
         selectedDescription: document.getElementById('selectedDescription'),
         selectedSource: document.getElementById('selectedSource'),
         selectedTags: document.getElementById('selectedTags'),
+        selectedFingerprint: document.getElementById('selectedFingerprint'),
         resultCount: document.getElementById('resultCount'),
         results: document.getElementById('tomatoResults'),
         search: document.getElementById('toySearch'),
@@ -433,6 +434,9 @@ function initializeTomatoToy() {
                 .map(tag => `<span>${escapeHtml(tag)}</span>`)
                 .join('');
         }
+        if (els.selectedFingerprint) {
+            els.selectedFingerprint.innerHTML = fingerprintCells(variety);
+        }
     }
 
     function renderResults(items) {
@@ -501,6 +505,26 @@ function initializeTomatoToy() {
         return [fields.fruit_shape, fields.skin_color, fields.taste, fields.season]
             .filter(Boolean)
             .join(' / ') || 'A cataloged tomato specimen waiting for more notes.';
+    }
+
+    function fingerprintCells(variety) {
+        const a = variety.attributes || {};
+        const cells = [
+            ['Sweet', a.sweetness, '#d44a35'],
+            ['Acid', a.acidity, '#c89537'],
+            ['Umami', a.umami, '#6c4a61'],
+            ['Juice', a.juiciness, '#466a76'],
+            ['Density', a.flesh_density, '#8f4b32'],
+            ['Drama', a.visual_drama, '#9a5a2f'],
+            ['Rarity', a.rarity, '#456c43'],
+            ['Ease', a.garden_ease, '#567f4b']
+        ];
+        return cells.map(([label, value, color]) => `
+            <div class="fingerprint-cell">
+                <span>${label} ${Math.round(value || 0)}</span>
+                <div class="fingerprint-track" style="--bar-color:${color}; --value:${Math.round(value || 0)}"><i></i></div>
+            </div>
+        `).join('');
     }
 }
 

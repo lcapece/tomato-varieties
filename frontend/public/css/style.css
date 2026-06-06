@@ -1172,6 +1172,43 @@ body:has(.tomato-toy) .navbar-nav {
     font-size: 0.74rem;
 }
 
+.attribute-fingerprint {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    margin-top: 12px;
+}
+
+.fingerprint-cell {
+    min-width: 0;
+}
+
+.fingerprint-cell span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fingerprint-track {
+    height: 6px;
+    margin-top: 4px;
+    border-radius: 999px;
+    background: rgba(35, 31, 27, 0.09);
+    overflow: hidden;
+}
+
+.fingerprint-track i {
+    display: block;
+    width: calc(var(--value, 0) * 1%);
+    height: 100%;
+    border-radius: inherit;
+    background: var(--bar-color, var(--tomato-primary));
+}
+
 .toy-controls {
     padding: 16px;
     align-self: start;
@@ -1530,6 +1567,10 @@ body:has(.tomato-toy) .navbar-nav {
     .selected-specimen {
         grid-template-columns: 1fr;
         margin: 0 10px 10px;
+    }
+
+    .attribute-fingerprint {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .selected-image {
