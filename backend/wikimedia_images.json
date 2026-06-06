@@ -1,0 +1,259 @@
+{
+  "generated_at": "2026-06-06T22:36:41.128914+00:00",
+  "items": {
+    "Abigail": {
+      "best_score": null,
+      "name": "Abigail",
+      "queries": [
+        "\"Abigail\" tomato"
+      ],
+      "status": "no_match"
+    },
+    "Abracazebra": {
+      "best_score": null,
+      "name": "Abracazebra",
+      "queries": [
+        "\"Abracazebra\" tomato"
+      ],
+      "status": "no_match"
+    },
+    "Abraham Lincoln": {
+      "best_score": null,
+      "name": "Abraham Lincoln",
+      "queries": [
+        "\"Abraham Lincoln\" tomato"
+      ],
+      "status": "no_match"
+    },
+    "Ace": {
+      "best_score": null,
+      "name": "Ace",
+      "queries": [
+        "\"Ace\" tomato"
+      ],
+      "status": "no_match"
+    },
+    "Aker's West Virginia": {
+      "best_score": null,
+      "name": "Aker's West Virginia",
+      "queries": [
+        "\"Aker's West Virginia\" tomato"
+      ],
+      "status": "no_match"
+    },
+    "Amish Paste": {
+      "artist": "terri_bateman",
+      "credit": "https://www.flickr.com/photos/134468672@N06/20277230435/",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Amish_paste_tomato_(20277230435).jpg",
+      "license": "CC0",
+      "mime": "image/jpeg",
+      "name": "Amish Paste",
+      "query": "\"Amish Paste\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Amish_paste_tomato_%2820277230435%29.jpg/960px-Amish_paste_tomato_%2820277230435%29.jpg",
+      "title": "File:Amish paste tomato (20277230435).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Amish_paste_tomato_%2820277230435%29.jpg"
+    },
+    "Big Boy": {
+      "best_score": null,
+      "name": "Big Boy",
+      "queries": [
+        "\"Big Boy\" tomato",
+        "Big Boy tomato"
+      ],
+      "status": "no_match"
+    },
+    "Black Cherry": {
+      "artist": "hedera.baltica from Wrocław, Poland",
+      "credit": "Black cherry",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Black_cherry_(50501135062).jpg",
+      "license": "CC BY-SA 2.0",
+      "mime": "image/jpeg",
+      "name": "Black Cherry",
+      "query": "\"Black Cherry\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Black_cherry_%2850501135062%29.jpg/960px-Black_cherry_%2850501135062%29.jpg",
+      "title": "File:Black cherry (50501135062).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Black_cherry_%2850501135062%29.jpg"
+    },
+    "Black Krim": {
+      "artist": "Kazvorpal",
+      "credit": "I created heirlooms.jpg several years ago from a pic of my own tomatoes lined up on a laundry basket. Now, I've cropped this off of it",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Black-krim-heirloom-tomato.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Black Krim",
+      "query": "\"Black Krim\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Black-krim-heirloom-tomato.jpg",
+      "title": "File:Black-krim-heirloom-tomato.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Black-krim-heirloom-tomato.jpg"
+    },
+    "Brandywine": {
+      "artist": "David.moreno72",
+      "credit": "Photograph of home grown Brandywine tomato",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Brandywine-Tomato.jpg",
+      "license": "CC BY-SA 4.0",
+      "mime": "image/jpeg",
+      "name": "Brandywine",
+      "query": "\"Brandywine\" tomato",
+      "score": 71,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Brandywine-Tomato.jpg/960px-Brandywine-Tomato.jpg",
+      "title": "File:Brandywine-Tomato.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Brandywine-Tomato.jpg"
+    },
+    "Celebrity": {
+      "best_score": null,
+      "name": "Celebrity",
+      "queries": [
+        "\"Celebrity\" tomato",
+        "Celebrity tomato"
+      ],
+      "status": "no_match"
+    },
+    "Cherokee Purple": {
+      "artist": "Healthnutlady",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Developing_Cherokee_Purple_Tomato.JPG",
+      "license": "CC BY 3.0",
+      "mime": "image/jpeg",
+      "name": "Cherokee Purple",
+      "query": "\"Cherokee Purple\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Developing_Cherokee_Purple_Tomato.JPG/960px-Developing_Cherokee_Purple_Tomato.JPG",
+      "title": "File:Developing Cherokee Purple Tomato.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Developing_Cherokee_Purple_Tomato.JPG"
+    },
+    "Costoluto Genovese": {
+      "artist": "Brücke-Osteuropa",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Pomodoro_Costoluto_Genovese.JPG",
+      "license": "CC0",
+      "mime": "image/jpeg",
+      "name": "Costoluto Genovese",
+      "query": "\"Costoluto Genovese\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Pomodoro_Costoluto_Genovese.JPG/960px-Pomodoro_Costoluto_Genovese.JPG",
+      "title": "File:Pomodoro Costoluto Genovese.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Pomodoro_Costoluto_Genovese.JPG"
+    },
+    "Early Girl": {
+      "artist": "Forest and Kim Starr",
+      "credit": "starr-221225-5256-Solanum_lycopersicum-Early_Girl_with_odd_white_like_coloring-Hawea_Pl_Olinda-Maui",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Starr-221225-5256-Solanum_lycopersicum-Early_Girl_with_odd_white_like_coloring-Hawea_Pl_Olinda-Maui_(52654386877).jpg",
+      "license": "CC BY 2.0",
+      "mime": "image/jpeg",
+      "name": "Early Girl",
+      "query": "\"Early Girl\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Starr-221225-5256-Solanum_lycopersicum-Early_Girl_with_odd_white_like_coloring-Hawea_Pl_Olinda-Maui_%2852654386877%29.jpg/960px-Starr-221225-5256-Solanum_lycopersicum-Early_Girl_with_odd_white_like_coloring-Hawea_Pl_Olinda-Maui_%2852654386877%29.jpg",
+      "title": "File:Starr-221225-5256-Solanum lycopersicum-Early Girl with odd white like coloring-Hawea Pl Olinda-Maui (52654386877).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Starr-221225-5256-Solanum_lycopersicum-Early_Girl_with_odd_white_like_coloring-Hawea_Pl_Olinda-Maui_%2852654386877%29.jpg"
+    },
+    "Green Zebra": {
+      "artist": "Cliff Hutson",
+      "credit": "originally posted to Flickr as Green Zebra Tomato #65",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Green_Zebra_Tomato_65.jpg",
+      "license": "CC BY 2.0",
+      "mime": "image/jpeg",
+      "name": "Green Zebra",
+      "query": "\"Green Zebra\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Green_Zebra_Tomato_65.jpg/960px-Green_Zebra_Tomato_65.jpg",
+      "title": "File:Green Zebra Tomato 65.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Green_Zebra_Tomato_65.jpg"
+    },
+    "Mortgage Lifter": {
+      "best_score": -999,
+      "name": "Mortgage Lifter",
+      "queries": [
+        "\"Mortgage Lifter\" tomato",
+        "Mortgage Lifter tomato"
+      ],
+      "status": "no_match"
+    },
+    "Mr. Stripey": {
+      "artist": "Henry Heatly from Chicago, United States of America",
+      "credit": "Mr. Stripey Heirloom Tomato",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Mr._Stripey_Heirloom_Tomato_leaf.jpg",
+      "license": "CC BY-SA 2.0",
+      "mime": "image/jpeg",
+      "name": "Mr. Stripey",
+      "query": "\"Mr. Stripey\" tomato",
+      "score": 71,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Mr._Stripey_Heirloom_Tomato_leaf.jpg/960px-Mr._Stripey_Heirloom_Tomato_leaf.jpg",
+      "title": "File:Mr. Stripey Heirloom Tomato leaf.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Mr._Stripey_Heirloom_Tomato_leaf.jpg"
+    },
+    "Paul Robeson": {
+      "artist": "Unknown author Unknown author",
+      "credit": "New J Ag",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Paul_Robeson-1_75_1_70_1_50.jpg",
+      "license": "CC BY 4.0",
+      "mime": "image/jpeg",
+      "name": "Paul Robeson",
+      "query": "\"Paul Robeson\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Paul_Robeson-1_75_1_70_1_50.jpg",
+      "title": "File:Paul Robeson-1 75 1 70 1 50.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Paul_Robeson-1_75_1_70_1_50.jpg"
+    },
+    "Pineapple": {
+      "artist": "Judgefloro",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:5815Tomato_textures_Pineapple_textures_Labanos_07.jpg",
+      "license": "CC0",
+      "mime": "image/jpeg",
+      "name": "Pineapple",
+      "query": "Pineapple tomato",
+      "score": 71,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/5815Tomato_textures_Pineapple_textures_Labanos_07.jpg/960px-5815Tomato_textures_Pineapple_textures_Labanos_07.jpg",
+      "title": "File:5815Tomato textures Pineapple textures Labanos 07.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/5815Tomato_textures_Pineapple_textures_Labanos_07.jpg"
+    },
+    "Roma": {
+      "artist": "Simon Law from Montréal, QC, Canada",
+      "credit": "Roma tomatoes",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Roma_tomatoes_(509115549).jpg",
+      "license": "CC BY-SA 2.0",
+      "mime": "image/jpeg",
+      "name": "Roma",
+      "query": "\"Roma\" tomato",
+      "score": 71,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Roma_tomatoes_%28509115549%29.jpg/960px-Roma_tomatoes_%28509115549%29.jpg",
+      "title": "File:Roma tomatoes (509115549).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Roma_tomatoes_%28509115549%29.jpg"
+    },
+    "Yellow Pear": {
+      "artist": "Forest and Kim Starr",
+      "credit": "starr-070906-8906-Solanum_lycopersicum-yellow_pear_habit-Kula_Ace_Hardware_and_Nursery-Maui",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Starr-070906-8906-Solanum_lycopersicum-yellow_pear_habit-Kula_Ace_Hardware_and_Nursery-Maui_(24265369533).jpg",
+      "license": "CC BY 3.0 us",
+      "mime": "image/jpeg",
+      "name": "Yellow Pear",
+      "query": "\"Yellow Pear\" tomato",
+      "score": 87,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Starr-070906-8906-Solanum_lycopersicum-yellow_pear_habit-Kula_Ace_Hardware_and_Nursery-Maui_%2824265369533%29.jpg/960px-Starr-070906-8906-Solanum_lycopersicum-yellow_pear_habit-Kula_Ace_Hardware_and_Nursery-Maui_%2824265369533%29.jpg",
+      "title": "File:Starr-070906-8906-Solanum lycopersicum-yellow pear habit-Kula Ace Hardware and Nursery-Maui (24265369533).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Starr-070906-8906-Solanum_lycopersicum-yellow_pear_habit-Kula_Ace_Hardware_and_Nursery-Maui_%2824265369533%29.jpg"
+    }
+  },
+  "source": "Wikimedia Commons API",
+  "stats": {
+    "matched": 13,
+    "no_match": 8
+  }
+}

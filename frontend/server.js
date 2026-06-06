@@ -2,10 +2,12 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const cors = require('cors');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:5000';
+const WIKIMEDIA_CACHE_PATH = path.join(__dirname, '..', 'backend', 'wikimedia_images.json');
 
 // Middleware
 app.use(cors());
@@ -58,6 +60,7 @@ function escapeRegExp(value) {
 function stripBoilerplate(value = '') {
     return compactText(value)
         .replace(/\bNote: Comments followed by "\?" are from seed catalog descriptions\. You decide if you agree\./i, '')
+        .replace(/\bPhoto by\b.*$/i, '')
         .replace(/\bVariety Search:\s*$/i, '')
         .replace(/\bVariety Search:\s*/gi, '')
         .trim();
@@ -126,6 +129,49 @@ function colorProfile(skinColor = '', fleshColor = '') {
     if (joined.includes('bi-color') || joined.includes('bicolor')) return { primary: '#c84b3a', secondary: '#e0be45', label: 'bi-color' };
     if (joined.includes('white')) return { primary: '#ddd1ad', secondary: '#f6e7c1', label: 'white' };
     return { primary: '#b7352c', secondary: '#e35b3f', label: 'red' };
+}
+
+let wikimediaImageCache = null;
+let wikimediaImageCacheMtime = 0;
+
+function loadWikimediaImageCache() {
+    try {
+        const stat = fs.statSync(WIKIMEDIA_CACHE_PATH);
+        if (wikimediaImageCache && stat.mtimeMs === wikimediaImageCacheMtime) {
+            return wikimediaImageCache;
+        }
+        const raw = fs.readFileSync(WIKIMEDIA_CACHE_PATH, 'utf8');
+        const parsed = JSON.parse(raw);
+        wikimediaImageCache = parsed.items || {};
+        wikimediaImageCacheMtime = stat.mtimeMs;
+        return wikimediaImageCache;
+    } catch {
+        wikimediaImageCache = {};
+        wikimediaImageCacheMtime = 0;
+        return wikimediaImageCache;
+    }
+}
+
+function getWikimediaImage(name) {
+    const cache = loadWikimediaImageCache();
+    const item = cache[name];
+    if (!item || item.status !== 'matched' || !item.thumb_url) {
+        return null;
+    }
+    return item;
+}
+
+function buildVarietySummary(fields) {
+    const parts = [];
+    if (fields.taste) parts.push(`${fields.taste} flavor`);
+    if (fields.fruit_size || fields.fruit_shape) {
+        parts.push([fields.fruit_size, fields.fruit_shape].filter(Boolean).join(' '));
+    }
+    if (fields.skin_color || fields.flesh_color) {
+        parts.push(`${[fields.skin_color, fields.flesh_color].filter(Boolean).join(' / ')} color`);
+    }
+    if (fields.season) parts.push(`${fields.season} season`);
+    return parts.join('. ');
 }
 
 function deriveAttributes(fields, variety, index) {
@@ -219,7 +265,9 @@ function enhanceVariety(variety, index) {
     const colors = colorProfile(fields.skin_color, fields.flesh_color);
     const attributes = deriveAttributes(fields, variety, index);
     const image = Array.isArray(variety.images) && variety.images.length ? variety.images[0] : null;
-    const imageUrl = image && !/njaes\.rutgers\.edu\/tomato-varieties\/images\//i.test(image.url) ? image.url : '';
+    const wikimediaImage = getWikimediaImage(variety.name);
+    const sourceImageUrl = image && !/njaes\.rutgers\.edu\/tomato-varieties\/images\//i.test(image.url) ? image.url : '';
+    const imageUrl = wikimediaImage?.thumb_url || sourceImageUrl || '';
     const comment = stripBoilerplate(fields.comments || '');
 
     return {
@@ -228,9 +276,10 @@ function enhanceVariety(variety, index) {
         slug: variety.slug || '',
         url: variety.url || '',
         imageUrl,
-        imageAlt: image ? image.alt : '',
-        imageSource: imageUrl ? 'Wikimedia image slot' : 'Wikimedia image pending',
-        description: comment || stripBoilerplate(variety.description || ''),
+        imageAlt: wikimediaImage ? wikimediaImage.title.replace(/^File:/, '') : image ? image.alt : '',
+        imageSource: wikimediaImage ? `Wikimedia Commons${wikimediaImage.license ? ` / ${wikimediaImage.license}` : ''}` : imageUrl ? 'Source image' : 'Wikimedia image pending',
+        imageCredit: wikimediaImage?.artist || wikimediaImage?.credit || '',
+        description: comment || buildVarietySummary(fields),
         fields,
         attributes,
         color: colors,

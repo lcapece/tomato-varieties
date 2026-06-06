@@ -348,7 +348,7 @@ function initializeTomatoToy() {
         score += locationScore(a) * 0.56;
         score += seasonScore(a) * 0.54;
         score += (a.rarity || 0) * 0.1;
-        score += variety.imageUrl ? 8 : 0;
+        score += variety.imageUrl ? 28 : 0;
 
         if (state.query) {
             if (searchable.includes(state.query)) {
