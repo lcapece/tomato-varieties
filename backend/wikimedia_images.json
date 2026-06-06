@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-06T22:36:41.128914+00:00",
+  "generated_at": "2026-06-06T22:52:43.526Z",
   "items": {
     "Abigail": {
       "best_score": null,
@@ -41,6 +41,20 @@
       ],
       "status": "no_match"
     },
+    "Alicante": {
+      "artist": "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:-2020-06-27_Tomato_plant_(Alicanti),_Trimingham,_Norfolk.JPG",
+      "license": "CC BY-SA 4.0",
+      "mime": "image/jpeg",
+      "name": "Alicante",
+      "query": "Category:Solanum lycopersicum 'Alicante'",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/-2020-06-27_Tomato_plant_%28Alicanti%29%2C_Trimingham%2C_Norfolk.JPG/960px--2020-06-27_Tomato_plant_%28Alicanti%29%2C_Trimingham%2C_Norfolk.JPG",
+      "title": "File:-2020-06-27 Tomato plant (Alicanti), Trimingham, Norfolk.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/-2020-06-27_Tomato_plant_%28Alicanti%29%2C_Trimingham%2C_Norfolk.JPG"
+    },
     "Amish Paste": {
       "artist": "terri_bateman",
       "credit": "https://www.flickr.com/photos/134468672@N06/20277230435/",
@@ -54,6 +68,68 @@
       "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Amish_paste_tomato_%2820277230435%29.jpg/960px-Amish_paste_tomato_%2820277230435%29.jpg",
       "title": "File:Amish paste tomato (20277230435).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Amish_paste_tomato_%2820277230435%29.jpg"
+    },
+    "Aunt Ruby's German Green": {
+      "artist": "Kazvorpal",
+      "credit": "Took the picture of my tomatoes, photoshopped it, cropped the final pic",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Aunt-rubys-german-green.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Aunt Ruby's German Green",
+      "query": "Category:Aunt Ruby's German Green (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Aunt-rubys-german-green.jpg",
+      "title": "File:Aunt-rubys-german-green.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Aunt-rubys-german-green.jpg"
+    },
+    "Azoychka": {
+      "artist": "Mttfromplessey",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Azoychka_Beefsteak_Tomato.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Azoychka",
+      "query": "Category:Azoychka (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Azoychka_Beefsteak_Tomato.jpg",
+      "title": "File:Azoychka Beefsteak Tomato.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Azoychka_Beefsteak_Tomato.jpg"
+    },
+    "Banana Legs": {
+      "artist": "manfred.sause@volloeko.de",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomate_Banana_Legs_P1020490.JPG",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Banana Legs",
+      "query": "Category:Banana Legs (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Tomate_Banana_Legs_P1020490.JPG",
+      "title": "File:Tomate Banana Legs P1020490.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Tomate_Banana_Legs_P1020490.JPG"
+    },
+    "Beauty": {
+      "status": "no_match",
+      "name": "Beauty",
+      "previous_title": "File:Seeds (1900) (20556897725).jpg",
+      "reason": "removed low-confidence category image"
+    },
+    "Beefsteak": {
+      "artist": "Ian L from London, UK",
+      "credit": "Beef tomatoes",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomatoes_in_Ventimiglia.jpg",
+      "license": "CC BY-SA 2.0",
+      "mime": "image/jpeg",
+      "name": "Beefsteak",
+      "query": "Category:Beefsteak (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Tomatoes_in_Ventimiglia.jpg/960px-Tomatoes_in_Ventimiglia.jpg",
+      "title": "File:Tomatoes in Ventimiglia.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/Tomatoes_in_Ventimiglia.jpg"
     },
     "Big Boy": {
       "best_score": null,
@@ -92,6 +168,20 @@
       "title": "File:Black-krim-heirloom-tomato.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Black-krim-heirloom-tomato.jpg"
     },
+    "Black Zebra": {
+      "artist": "Photograph: Frank C. Müller , Frankfurt am Main",
+      "credit": "Self-photographed",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Black_Zebra_03_(fcm).jpg",
+      "license": "CC BY-SA 4.0",
+      "mime": "image/jpeg",
+      "name": "Black Zebra",
+      "query": "Category:Black Zebra",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Black_Zebra_03_%28fcm%29.jpg/960px-Black_Zebra_03_%28fcm%29.jpg",
+      "title": "File:Black Zebra 03 (fcm).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Black_Zebra_03_%28fcm%29.jpg"
+    },
     "Brandywine": {
       "artist": "David.moreno72",
       "credit": "Photograph of home grown Brandywine tomato",
@@ -107,13 +197,18 @@
       "url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Brandywine-Tomato.jpg"
     },
     "Celebrity": {
-      "best_score": null,
+      "artist": "Rob Duval",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Celebrity-unripe.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
       "name": "Celebrity",
-      "queries": [
-        "\"Celebrity\" tomato",
-        "Celebrity tomato"
-      ],
-      "status": "no_match"
+      "query": "Category:Solanum lycopersicum 'Celebrity'",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Celebrity-unripe.jpg",
+      "title": "File:Celebrity-unripe.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Celebrity-unripe.jpg"
     },
     "Cherokee Purple": {
       "artist": "Healthnutlady",
@@ -129,6 +224,34 @@
       "title": "File:Developing Cherokee Purple Tomato.JPG",
       "url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Developing_Cherokee_Purple_Tomato.JPG"
     },
+    "Cherry Roma": {
+      "artist": "Photograph: Frank C. Müller , Frankfurt am Main",
+      "credit": "Self-photographed",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomatensorte_Cherry_Roma_04_(fcm).jpg",
+      "license": "CC BY-SA 4.0",
+      "mime": "image/jpeg",
+      "name": "Cherry Roma",
+      "query": "Category:Cherry Roma (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Tomatensorte_Cherry_Roma_04_%28fcm%29.jpg/960px-Tomatensorte_Cherry_Roma_04_%28fcm%29.jpg",
+      "title": "File:Tomatensorte Cherry Roma 04 (fcm).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Tomatensorte_Cherry_Roma_04_%28fcm%29.jpg"
+    },
+    "Costoluto Fiorentino (2)": {
+      "artist": "User:Zenwort",
+      "credit": "Own work , photographed in the Botanical Garden, Košice, Slovakia.",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Solanum_lycopersicum_Costuluto-Fiorentino_Ko%C5%A1ice-BotGar_20210904.jpg",
+      "license": "CC BY-SA 4.0",
+      "mime": "image/jpeg",
+      "name": "Costoluto Fiorentino (2)",
+      "query": "Category:Costoluto Fiorentino (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Solanum_lycopersicum_Costuluto-Fiorentino_Ko%C5%A1ice-BotGar_20210904.jpg/960px-Solanum_lycopersicum_Costuluto-Fiorentino_Ko%C5%A1ice-BotGar_20210904.jpg",
+      "title": "File:Solanum lycopersicum Costuluto-Fiorentino Košice-BotGar 20210904.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Solanum_lycopersicum_Costuluto-Fiorentino_Ko%C5%A1ice-BotGar_20210904.jpg"
+    },
     "Costoluto Genovese": {
       "artist": "Brücke-Osteuropa",
       "credit": "Own work",
@@ -142,6 +265,12 @@
       "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Pomodoro_Costoluto_Genovese.JPG/960px-Pomodoro_Costoluto_Genovese.JPG",
       "title": "File:Pomodoro Costoluto Genovese.JPG",
       "url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Pomodoro_Costoluto_Genovese.JPG"
+    },
+    "Earliana": {
+      "status": "no_match",
+      "name": "Earliana",
+      "previous_title": "File:Dupuy and Ferguson materials BHL46962636.jpg",
+      "reason": "removed low-confidence category image"
     },
     "Early Girl": {
       "artist": "Forest and Kim Starr",
@@ -157,6 +286,46 @@
       "title": "File:Starr-221225-5256-Solanum lycopersicum-Early Girl with odd white like coloring-Hawea Pl Olinda-Maui (52654386877).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Starr-221225-5256-Solanum_lycopersicum-Early_Girl_with_odd_white_like_coloring-Hawea_Pl_Olinda-Maui_%2852654386877%29.jpg"
     },
+    "Golden Jubilee": {
+      "status": "no_match",
+      "name": "Golden Jubilee",
+      "previous_title": "File:Childs' spring 1922 - seeds that satisfy plants that please bulbs that bloom berries that bear (1922) (14586809237).jpg",
+      "reason": "removed low-confidence category image"
+    },
+    "Golden Ponderosa": {
+      "status": "no_match",
+      "name": "Golden Ponderosa",
+      "previous_title": "File:Everything for the garden (16390782485).jpg",
+      "reason": "removed low-confidence category image"
+    },
+    "Great White": {
+      "artist": "Rob Duval",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Great_white-unripe.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Great White",
+      "query": "Category:Solanum lycopersicum 'Great White'",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Great_white-unripe.jpg",
+      "title": "File:Great white-unripe.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Great_white-unripe.jpg"
+    },
+    "Greater Baltimore": {
+      "artist": "Internet Archive Book Images",
+      "credit": "https://www.flickr.com/photos/internetarchivebookimages/20390878245/ Source book page: https://archive.org/stream/bolgianosofbalti19jbol/#page/n52/mode/1up",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Bolgiano%27s_of_Baltimore_the_monumental_city_1924_-_introducing_the_monumental_tomato_(1924)_(20390878245).jpg",
+      "license": "No restrictions",
+      "mime": "image/jpeg",
+      "name": "Greater Baltimore",
+      "query": "Category:Greater Baltimore (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Bolgiano%27s_of_Baltimore_the_monumental_city_1924_-_introducing_the_monumental_tomato_%281924%29_%2820390878245%29.jpg/960px-Bolgiano%27s_of_Baltimore_the_monumental_city_1924_-_introducing_the_monumental_tomato_%281924%29_%2820390878245%29.jpg",
+      "title": "File:Bolgiano's of Baltimore the monumental city 1924 - introducing the monumental tomato (1924) (20390878245).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Bolgiano%27s_of_Baltimore_the_monumental_city_1924_-_introducing_the_monumental_tomato_%281924%29_%2820390878245%29.jpg"
+    },
     "Green Zebra": {
       "artist": "Cliff Hutson",
       "credit": "originally posted to Flickr as Green Zebra Tomato #65",
@@ -170,6 +339,124 @@
       "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Green_Zebra_Tomato_65.jpg/960px-Green_Zebra_Tomato_65.jpg",
       "title": "File:Green Zebra Tomato 65.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Green_Zebra_Tomato_65.jpg"
+    },
+    "Heinz 1439": {
+      "artist": "manfred.sause@volloeko.de",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomate_Heinz_1439_P1020472.JPG",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Heinz 1439",
+      "query": "Category:Heinz 1439 (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Tomate_Heinz_1439_P1020472.JPG",
+      "title": "File:Tomate Heinz 1439 P1020472.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Tomate_Heinz_1439_P1020472.JPG"
+    },
+    "Indigo Rose": {
+      "artist": "chipmunk_1",
+      "credit": "https://www.flickr.com/photos/42919152@N04/9494341005",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Indigo_Rose_Tomatoes.jpg",
+      "license": "CC BY-SA 2.0",
+      "mime": "image/jpeg",
+      "name": "Indigo Rose",
+      "query": "Category:Indigo Rose (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Indigo_Rose_Tomatoes.jpg/960px-Indigo_Rose_Tomatoes.jpg",
+      "title": "File:Indigo Rose Tomatoes.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Indigo_Rose_Tomatoes.jpg"
+    },
+    "Juliet": {
+      "artist": "Stickpen",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Grapetomato-juliet.jpg",
+      "license": "Public domain",
+      "mime": "image/jpeg",
+      "name": "Juliet",
+      "query": "Category:Juliet (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Grapetomato-juliet.jpg/960px-Grapetomato-juliet.jpg",
+      "title": "File:Grapetomato-juliet.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Grapetomato-juliet.jpg"
+    },
+    "Lemon Boy": {
+      "artist": "Henry Heatly from Chicago, USA",
+      "credit": "Lemon Boy Hybrid Tomato",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Lemon_Boy_Hybrid_Tomato_fruit.jpg",
+      "license": "CC BY-SA 2.0",
+      "mime": "image/jpeg",
+      "name": "Lemon Boy",
+      "query": "Category:Lemon Boy (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Lemon_Boy_Hybrid_Tomato_fruit.jpg/960px-Lemon_Boy_Hybrid_Tomato_fruit.jpg",
+      "title": "File:Lemon Boy Hybrid Tomato fruit.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Lemon_Boy_Hybrid_Tomato_fruit.jpg"
+    },
+    "Marmande": {
+      "artist": "Alpha from Melbourne, Australia",
+      "credit": "Ridged - Rouge de Marmande Tomatoes",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomates_Marmande.jpg",
+      "license": "CC BY-SA 2.0",
+      "mime": "image/jpeg",
+      "name": "Marmande",
+      "query": "Category:Marmande (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Tomates_Marmande.jpg/960px-Tomates_Marmande.jpg",
+      "title": "File:Tomates Marmande.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Tomates_Marmande.jpg"
+    },
+    "Matchless": {
+      "status": "no_match",
+      "name": "Matchless",
+      "previous_title": "File:R.H. Shumway's illustrated garden guide (1897) (20541942292).jpg",
+      "reason": "removed low-confidence category image"
+    },
+    "Matt's Wild Cherry": {
+      "artist": "Kazvorpal",
+      "credit": "I cut this from http://en.wikipedia.org/wiki/File:Heirlooms.jpg which is also my own work Previously published: http://en.wikipedia.org/wiki/File:Heirlooms.jpg",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Matts-wild-cherry.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Matt's Wild Cherry",
+      "query": "Category:Matt's Wild Cherry (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Matts-wild-cherry.jpg",
+      "title": "File:Matts-wild-cherry.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Matts-wild-cherry.jpg"
+    },
+    "Mikado": {
+      "artist": "",
+      "credit": "This file was contributed to Wikimedia Commons by Boston Public Library as part of a cooperation project. The donation was facilitated by the Digital Public Library of America . Record in source catalog DPLA identifier: 8bcc3032724f6ed3b0f0857ac35276bc Boston Public Library identifier: Local accession: 10_03_001665",
+      "description_url": "https://commons.wikimedia.org/wiki/File:The_Mikado_or_Turner_Hybrid_tomato._Only_found_in_Rices_box_of_choice_vegetables._Old_favorites_must_take_a_back_seat._-_DPLA_-_8bcc3032724f6ed3b0f0857ac35276bc_(page_2).jpg",
+      "license": "Public domain",
+      "mime": "image/jpeg",
+      "name": "Mikado",
+      "query": "Category:Mikado (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/The_Mikado_or_Turner_Hybrid_tomato._Only_found_in_Rices_box_of_choice_vegetables._Old_favorites_must_take_a_back_seat._-_DPLA_-_8bcc3032724f6ed3b0f0857ac35276bc_%28page_2%29.jpg/960px-thumbnail.jpg",
+      "title": "File:The Mikado or Turner Hybrid tomato. Only found in Rices box of choice vegetables. Old favorites must take a back seat. - DPLA - 8bcc3032724f6ed3b0f0857ac35276bc (page 2).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/The_Mikado_or_Turner_Hybrid_tomato._Only_found_in_Rices_box_of_choice_vegetables._Old_favorites_must_take_a_back_seat._-_DPLA_-_8bcc3032724f6ed3b0f0857ac35276bc_%28page_2%29.jpg"
+    },
+    "Moneymaker": {
+      "artist": "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:-2020-06-26_Tomato_plant_(Moneymaker),_Trimingham,_Norfolk.JPG",
+      "license": "CC BY-SA 4.0",
+      "mime": "image/jpeg",
+      "name": "Moneymaker",
+      "query": "Category:Solanum lycopersicum 'Moneymaker'",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/-2020-06-26_Tomato_plant_%28Moneymaker%29%2C_Trimingham%2C_Norfolk.JPG/960px--2020-06-26_Tomato_plant_%28Moneymaker%29%2C_Trimingham%2C_Norfolk.JPG",
+      "title": "File:-2020-06-26 Tomato plant (Moneymaker), Trimingham, Norfolk.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/-2020-06-26_Tomato_plant_%28Moneymaker%29%2C_Trimingham%2C_Norfolk.JPG"
     },
     "Mortgage Lifter": {
       "best_score": -999,
@@ -193,6 +480,34 @@
       "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Mr._Stripey_Heirloom_Tomato_leaf.jpg/960px-Mr._Stripey_Heirloom_Tomato_leaf.jpg",
       "title": "File:Mr. Stripey Heirloom Tomato leaf.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Mr._Stripey_Heirloom_Tomato_leaf.jpg"
+    },
+    "New Yorker": {
+      "artist": "manfred.sause@volloeko.de",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomate_New_Yorker_P1020450.JPG",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "New Yorker",
+      "query": "Category:New Yorker (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tomate_New_Yorker_P1020450.JPG",
+      "title": "File:Tomate New Yorker P1020450.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tomate_New_Yorker_P1020450.JPG"
+    },
+    "Omar's Lebanese": {
+      "artist": "manfred.sause@volloeko.de",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomate_Omars_Lebanese_P1020445.JPG",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Omar's Lebanese",
+      "query": "Category:Omar's Lebanese (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Tomate_Omars_Lebanese_P1020445.JPG",
+      "title": "File:Tomate Omars Lebanese P1020445.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Tomate_Omars_Lebanese_P1020445.JPG"
     },
     "Paul Robeson": {
       "artist": "Unknown author Unknown author",
@@ -222,6 +537,26 @@
       "title": "File:5815Tomato textures Pineapple textures Labanos 07.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/5815Tomato_textures_Pineapple_textures_Labanos_07.jpg"
     },
+    "Ravello": {
+      "status": "no_match",
+      "name": "Ravello",
+      "previous_title": "File:Rawello.jpg",
+      "reason": "removed low-confidence category image"
+    },
+    "Reisetomate": {
+      "artist": "Frank Vincentz",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Kluse_-_Solanum_lycopersicum_-_Reisetomate_08_ies.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Reisetomate",
+      "query": "Category:Reisetomate",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Kluse_-_Solanum_lycopersicum_-_Reisetomate_08_ies.jpg/960px-Kluse_-_Solanum_lycopersicum_-_Reisetomate_08_ies.jpg",
+      "title": "File:Kluse - Solanum lycopersicum - Reisetomate 08 ies.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Kluse_-_Solanum_lycopersicum_-_Reisetomate_08_ies.jpg"
+    },
     "Roma": {
       "artist": "Simon Law from Montréal, QC, Canada",
       "credit": "Roma tomatoes",
@@ -235,6 +570,68 @@
       "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Roma_tomatoes_%28509115549%29.jpg/960px-Roma_tomatoes_%28509115549%29.jpg",
       "title": "File:Roma tomatoes (509115549).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Roma_tomatoes_%28509115549%29.jpg"
+    },
+    "Stone": {
+      "status": "no_match",
+      "name": "Stone",
+      "previous_title": "File:R.H. Shumway's illustrated garden guide (1897) (20541942292).jpg",
+      "reason": "removed low-confidence category image"
+    },
+    "Super Sweet 100": {
+      "artist": "Pluma",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Cherry_tomatoes.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Super Sweet 100",
+      "query": "Category:Super Sweet 100",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Cherry_tomatoes.jpg/960px-Cherry_tomatoes.jpg",
+      "title": "File:Cherry tomatoes.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Cherry_tomatoes.jpg"
+    },
+    "Tigerella": {
+      "artist": "manfred.sause@volloeko.de",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomate_Tigerella_P1020497.JPG",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "Tigerella",
+      "query": "Category:Tigerella (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Tomate_Tigerella_P1020497.JPG",
+      "title": "File:Tomate Tigerella P1020497.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Tomate_Tigerella_P1020497.JPG"
+    },
+    "Trophy": {
+      "artist": "Vilmorin-Andrieux &amp; Cie",
+      "credit": "Les Plantes potagères : description et culture des principaux légumes des climats tempérés (1883) sur Internet Archive.",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Tomate_rouge_grosse_lisse_Vilmorin-Andrieux_1883.png",
+      "license": "Public domain",
+      "mime": "image/png",
+      "name": "Trophy",
+      "query": "Category:Trophy (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Tomate_rouge_grosse_lisse_Vilmorin-Andrieux_1883.png",
+      "title": "File:Tomate rouge grosse lisse Vilmorin-Andrieux 1883.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Tomate_rouge_grosse_lisse_Vilmorin-Andrieux_1883.png"
+    },
+    "White Beauty": {
+      "artist": "Leutha",
+      "credit": "Own work",
+      "description_url": "https://commons.wikimedia.org/wiki/File:Alytus_Tomato_Tasting_2013,_large_yellow_tomato.jpg",
+      "license": "CC BY-SA 3.0",
+      "mime": "image/jpeg",
+      "name": "White Beauty",
+      "query": "Category:White Beauty (tomato)",
+      "score": 90,
+      "status": "matched",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Alytus_Tomato_Tasting_2013%2C_large_yellow_tomato.jpg/960px-Alytus_Tomato_Tasting_2013%2C_large_yellow_tomato.jpg",
+      "title": "File:Alytus Tomato Tasting 2013, large yellow tomato.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/Alytus_Tomato_Tasting_2013%2C_large_yellow_tomato.jpg"
     },
     "Yellow Pear": {
       "artist": "Forest and Kim Starr",
@@ -253,7 +650,7 @@
   },
   "source": "Wikimedia Commons API",
   "stats": {
-    "matched": 13,
-    "no_match": 8
+    "matched": 39,
+    "no_match": 14
   }
 }
