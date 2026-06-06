@@ -187,7 +187,8 @@ function initializeTomatoToy() {
         location: 'any',
         season: 'any',
         query: '',
-        selectedId: varieties[0].id
+        selectedId: varieties[0].id,
+        selectionLocked: false
     };
 
     const els = {
@@ -215,6 +216,7 @@ function initializeTomatoToy() {
             document.querySelectorAll('.meal-chip').forEach(item => item.classList.remove('active'));
             button.classList.add('active');
             state.meal = button.dataset.meal || 'sauce';
+            state.selectionLocked = false;
             renderToy();
         });
     });
@@ -222,6 +224,7 @@ function initializeTomatoToy() {
     if (els.search) {
         els.search.addEventListener('input', debounce(event => {
             state.query = event.target.value.trim().toLowerCase();
+            state.selectionLocked = false;
             renderToy();
         }, 120));
     }
@@ -234,6 +237,7 @@ function initializeTomatoToy() {
         if (!input) return;
         input.addEventListener('input', event => {
             state[key] = Number(event.target.value);
+            state.selectionLocked = false;
             renderToy();
         });
     });
@@ -241,6 +245,7 @@ function initializeTomatoToy() {
     if (els.location) {
         els.location.addEventListener('change', event => {
             state.location = event.target.value;
+            state.selectionLocked = false;
             renderToy();
         });
     }
@@ -248,6 +253,7 @@ function initializeTomatoToy() {
     if (els.season) {
         els.season.addEventListener('change', event => {
             state.season = event.target.value;
+            state.selectionLocked = false;
             renderToy();
         });
     }
@@ -259,6 +265,7 @@ function initializeTomatoToy() {
                 .sort((a, b) => b.score - a.score);
             const pick = strange[Math.floor(Math.random() * Math.min(18, strange.length))]?.variety || varieties[0];
             state.selectedId = pick.id;
+            state.selectionLocked = true;
             state.drama = Math.max(70, state.drama);
             if (els.drama) els.drama.value = state.drama;
             updateSelected(pick);
@@ -285,6 +292,7 @@ function initializeTomatoToy() {
                 state.gardenX = x;
                 state.gardenY = y;
             }
+            state.selectionLocked = false;
             setAxisValue(axis, x, y);
             renderToy();
         };
@@ -308,7 +316,8 @@ function initializeTomatoToy() {
 
     function renderToy() {
         const ranked = rankVarieties();
-        const selected = ranked.find(item => item.variety.id === state.selectedId)?.variety || ranked[0]?.variety || varieties[0];
+        const locked = state.selectionLocked ? ranked.find(item => item.variety.id === state.selectedId)?.variety : null;
+        const selected = locked || ranked[0]?.variety || varieties[0];
         if (selected) {
             state.selectedId = selected.id;
             updateSelected(selected);
@@ -476,6 +485,7 @@ function initializeTomatoToy() {
                 const variety = varieties.find(item => item.id === id);
                 if (!variety) return;
                 state.selectedId = variety.id;
+                state.selectionLocked = true;
                 updateSelected(variety);
                 els.results.querySelectorAll('.toy-card').forEach(item => item.classList.toggle('active', item === card));
             };
