@@ -228,6 +228,27 @@ function deriveAttributes(fields, variety, index) {
     const early = season.includes('early') ? 90 : season.includes('mid') ? 55 : season.includes('late') ? 22 : 48;
     const late = season.includes('late') ? 88 : season.includes('mid') ? 58 : season.includes('early') ? 28 : 50;
     const compact = plantType.includes('determinate') ? 76 : plantType.includes('semi') ? 58 : 34;
+    const plantHeightFt = numberFrom(fields.plant_height) || 0;
+    const fruitWeightOz = sizeOz || 0;
+    const determinate = plantType.includes('determinate') && !plantType.includes('indeterminate');
+    const indeterminate = plantType.includes('indeterminate');
+    const semiDeterminate = plantType.includes('semi');
+    const heirloom = type.includes('heirloom');
+    const hybrid = breed.includes('hybrid');
+    const openPollinated = breed.includes('open');
+    const redPink = hasAny(`${fields.skin_color} ${fields.flesh_color}`, ['red', 'pink']);
+    const yellowOrange = hasAny(`${fields.skin_color} ${fields.flesh_color}`, ['yellow', 'orange']);
+    const green = hasAny(`${fields.skin_color} ${fields.flesh_color}`, ['green']);
+    const white = hasAny(`${fields.skin_color} ${fields.flesh_color}`, ['white']);
+    const bicolor = hasAny(`${fields.skin_color} ${fields.flesh_color}`, ['bi-color', 'bicolor']);
+    const grape = shape.includes('grape');
+    const pear = shape.includes('pear');
+    const globe = shape.includes('globe') || shape.includes('round');
+    const heart = shape.includes('heart');
+    const ribbed = hasAny(shape, ['ribbed', 'ruffled', 'fluted']);
+    const largeFruit = fruitWeightOz >= 8 || beefsteak;
+    const smallFruit = cherry || grape || fruitWeightOz <= 2;
+    const fieldCompleteness = clamp((Object.keys(fields).length / FIELD_LABELS.length) * 100);
 
     return {
         sweetness: sweet,
@@ -267,8 +288,105 @@ function deriveAttributes(fields, variety, index) {
         pizza: clamp(38 + (paste ? 34 : 0) + (umami > 65 ? 16 : 0)),
         soup: clamp(46 + (juiciness > 55 ? 14 : 0) + (umami > 60 ? 12 : 0)),
         snack: clamp(40 + (cherry ? 36 : 0) + (sweet > 75 ? 18 : 0)),
-        fine_dining: clamp(34 + (visualDrama > 65 ? 30 : 0) + (umami > 68 ? 14 : 0) + (type.includes('heirloom') ? 12 : 0))
+        fine_dining: clamp(34 + (visualDrama > 65 ? 30 : 0) + (umami > 68 ? 14 : 0) + (type.includes('heirloom') ? 12 : 0)),
+        plant_height_ft: plantHeightFt,
+        plant_height_score: clamp(plantHeightFt ? plantHeightFt * 13 : compact),
+        fruit_weight_oz: fruitWeightOz,
+        fruit_weight_score: clamp(fruitWeightOz ? fruitWeightOz * 7 : smallFruit ? 18 : 52),
+        field_completeness: fieldCompleteness,
+        description_richness: clamp(compactText(fields.comments || variety.description || '').length / 2),
+        image_readiness: Array.isArray(variety.images) && variety.images.length ? 72 : 24,
+        cultivar_specificity: clamp(fieldCompleteness + (commentSignal(fields.comments) ? 14 : 0)),
+        cherry_type: cherry ? 100 : 0,
+        grape_type: grape ? 100 : 0,
+        beefsteak_type: beefsteak ? 100 : 0,
+        paste_type: paste ? 100 : 0,
+        slicer_type: beefsteak || globe || largeFruit ? 82 : 34,
+        pear_shape: pear ? 100 : 0,
+        globe_shape: globe ? 100 : 0,
+        heart_shape: heart ? 100 : 0,
+        ribbed_shape: ribbed ? 100 : 0,
+        striped_skin: striped ? 100 : 0,
+        dark_skin: dark ? 100 : 0,
+        green_when_ripe: green ? 100 : 0,
+        yellow_or_orange: yellowOrange ? 100 : 0,
+        red_or_pink: redPink ? 100 : 0,
+        white_or_cream: white ? 100 : 0,
+        bicolor_pattern: bicolor ? 100 : 0,
+        heirloom_score: heirloom ? 100 : 22,
+        hybrid_score: hybrid ? 100 : 18,
+        open_pollinated_score: openPollinated ? 100 : 24,
+        determinate_score: determinate ? 100 : 0,
+        indeterminate_score: indeterminate ? 100 : 0,
+        semi_determinate_score: semiDeterminate ? 100 : 0,
+        novelty_score: clamp(visualDrama + (rareNameSignal(variety.name) ? 10 : 0)),
+        grocery_fit: clamp(market.overall + (hybrid ? 12 : 0) + (largeFruit || cherry ? 6 : 0)),
+        farmers_market_fit: clamp(42 + (heirloom ? 24 : 0) + (visualDrama > 55 ? 20 : 0) + (openPollinated ? 8 : 0)),
+        seed_catalog_fit: clamp(42 + (openPollinated ? 24 : 0) + (heirloom ? 16 : 0) + (noveltySignal(lower) ? 12 : 0)),
+        csa_fit: clamp(44 + (garden_easeScore(plantType, disease, hybrid) / 3) + (visualDrama > 55 ? 10 : 0)),
+        restaurant_fit: clamp(34 + (fineDiningScore(visualDrama, umami, heirloom)) + (density > 65 ? 8 : 0)),
+        kid_friendly: clamp(36 + (sweet > 75 ? 26 : 0) + (cherry || grape ? 28 : 0) - (acid > 75 ? 10 : 0)),
+        preservation_fit: clamp(34 + (paste ? 32 : 0) + (canningScore(paste, density, acid) / 3)),
+        raw_eating_fit: clamp(40 + (sweet > 72 ? 18 : 0) + (juiciness > 52 ? 14 : 0) + (acid < 70 ? 8 : 0)),
+        sauce_body: clamp(density + (paste ? 16 : 0) + (umami > 65 ? 8 : 0)),
+        fresh_market_fit: clamp(market.overall + (visualDrama > 55 ? 8 : 0) + (shelfLifeScore(lower, paste) / 4)),
+        patio_fit: clamp(compact + (smallFruit ? 12 : 0) - (plantHeightFt > 5 ? 16 : 0)),
+        trellis_need: clamp((indeterminate ? 72 : 28) + (plantHeightFt > 5 ? 18 : 0) + (largeFruit ? 8 : 0)),
+        pruning_need: clamp((indeterminate ? 62 : 28) + (disease < 50 ? 8 : 0)),
+        spacing_need: clamp(plantHeightFt ? plantHeightFt * 12 : indeterminate ? 70 : 44),
+        harvest_window_score: clamp(early * 0.45 + late * 0.45 + (determinate ? 4 : 10)),
+        transplant_forgiveness: clamp(42 + (hybrid ? 14 : 0) + (disease > 60 ? 16 : 0) + (determinate ? 8 : 0)),
+        humidity_risk: clamp(72 - disease + (denseFoliageSignal(fields.leaf_type, plantType) ? 12 : 0)),
+        split_risk: clamp(68 - (disease > 60 ? 8 : 0) - (hasAny(lower, ['crack resistant']) ? 24 : 0) + (juiciness > 60 ? 8 : 0)),
+        blossom_end_rot_risk: clamp(44 + (largeFruit ? 16 : 0) + (paste ? 8 : 0) - (hybrid ? 6 : 0)),
+        foliage_disease_risk: clamp(72 - disease + (plantType.includes('indeterminate') ? 6 : 0)),
+        short_season_fit: clamp(early + (plantHeightFt && plantHeightFt <= 4 ? 8 : 0)),
+        long_season_fit: clamp(late + (indeterminate ? 8 : 0)),
+        commercial_fit: clamp(market.overall + (hybrid ? 14 : 0) + (shelfLifeScore(lower, paste) / 4)),
+        home_garden_fit: clamp(48 + (heirloom ? 14 : 0) + (openPollinated ? 10 : 0) + (garden_easeScore(plantType, disease, hybrid) / 4)),
+        color_contrast: clamp((bicolor ? 80 : 30) + (striped ? 18 : 0) + (dark ? 10 : 0)),
+        plate_appeal: clamp(visualDrama * 0.65 + rawEatingScore(sweet, juiciness, acid) * 0.35),
+        cultivar_confidence: clamp(50 + fieldCompleteness * 0.4 + (fields.comments ? 12 : 0)),
+        source_traceability: clamp(44 + (variety.url ? 26 : 0) + (variety.page_title ? 12 : 0)),
+        data_quality_score: clamp(fieldCompleteness * 0.55 + (variety.raw_text ? 24 : 0) + (fields.comments ? 10 : 0)),
+        decision_readiness: clamp(fieldCompleteness * 0.45 + garden_easeScore(plantType, disease, hybrid) * 0.2 + market.overall * 0.2 + rawEatingScore(sweet, juiciness, acid) * 0.15)
     };
+}
+
+function commentSignal(value = '') {
+    return compactText(value).replace(/[^a-z0-9]/gi, '').length > 20;
+}
+
+function rareNameSignal(value = '') {
+    return hasAny(value, ['striped', 'zebra', 'black', 'purple', 'green', 'chocolate', 'pineapple', 'rainbow']);
+}
+
+function noveltySignal(value = '') {
+    return hasAny(value, ['stripe', 'striped', 'zebra', 'black', 'purple', 'green', 'white', 'bi-color', 'bicolor', 'pear', 'heart']);
+}
+
+function garden_easeScore(plantType, disease, hybrid) {
+    return clamp(42 + (plantType.includes('determinate') ? 18 : 0) + (disease > 60 ? 18 : 0) + (hybrid ? 8 : 0));
+}
+
+function fineDiningScore(visualDrama, umami, heirloom) {
+    return clamp((visualDrama > 65 ? 30 : 0) + (umami > 68 ? 14 : 0) + (heirloom ? 12 : 0));
+}
+
+function canningScore(paste, density, acid) {
+    return clamp(36 + (paste ? 34 : 0) + (density > 65 ? 14 : 0) + (acid > 60 ? 12 : 0));
+}
+
+function shelfLifeScore(lower, paste) {
+    return clamp(40 + (hasAny(lower, ['commercial', 'firm', 'storage', 'shipping']) ? 26 : 0) + (paste ? 10 : 0));
+}
+
+function denseFoliageSignal(leafType, plantType) {
+    return hasAny(`${leafType} ${plantType}`, ['potato', 'indeterminate', 'regular']);
+}
+
+function rawEatingScore(sweet, juiciness, acid) {
+    return clamp(40 + (sweet > 72 ? 18 : 0) + (juiciness > 52 ? 14 : 0) + (acid < 70 ? 8 : 0));
 }
 
 function slicingScoreBonus(shape, sizeOz) {
@@ -380,6 +498,8 @@ app.get('/', async (req, res) => {
         const rawVarieties = data.varieties || [];
         const toyVarieties = rawVarieties.map(enhanceVariety);
         const imageCount = toyVarieties.filter(variety => variety.imageUrl).length;
+        const attributeCounts = toyVarieties.map(variety => Object.keys(variety.attributes || {}).length);
+        const attributeCount = attributeCounts.length ? Math.min(...attributeCounts) : 0;
         
         res.render('index', { 
             varieties: rawVarieties,
@@ -389,7 +509,7 @@ app.get('/', async (req, res) => {
             source: data.source || '',
             toyStats: {
                 imageCount,
-                attributeCount: 52,
+                attributeCount,
                 sourceCount: rawVarieties.length,
                 wikimediaReadyCount: toyVarieties.length - imageCount
             }
@@ -535,16 +655,24 @@ app.use((req, res) => {
     });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`🍅 Tomato Varieties Frontend Server running on port ${PORT}`);
-    console.log(`📱 Open your browser to: http://localhost:${PORT}`);
-    console.log(`🔗 API Backend should be running on: ${API_BASE_URL}`);
-    console.log('');
-    console.log('Available routes:');
-    console.log('  GET  /                     - Home page (all varieties)');
-    console.log('  GET  /search?q=<query>     - Search varieties');
-    console.log('  GET  /tomato/<name>        - Individual variety details');
-    console.log('  GET  /stats                - Database statistics');
-    console.log('  GET  /api/*                - API proxy endpoints');
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`🍅 Tomato Varieties Frontend Server running on port ${PORT}`);
+        console.log(`📱 Open your browser to: http://localhost:${PORT}`);
+        console.log(`🔗 API Backend should be running on: ${API_BASE_URL}`);
+        console.log('');
+        console.log('Available routes:');
+        console.log('  GET  /                     - Home page (all varieties)');
+        console.log('  GET  /search?q=<query>     - Search varieties');
+        console.log('  GET  /tomato/<name>        - Individual variety details');
+        console.log('  GET  /stats                - Database statistics');
+        console.log('  GET  /api/*                - API proxy endpoints');
+    });
+}
+
+module.exports = {
+    app,
+    enhanceVariety,
+    parseVarietyFields,
+    deriveAttributes
+};
