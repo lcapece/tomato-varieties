@@ -31,6 +31,486 @@ function initializeApp() {
 
     // Initialize the homepage discovery toy when present
     initializeTomatoToy();
+
+    // Initialize the premium SPA shell when present
+    initializeTomatoIntelligenceApp();
+}
+
+function initializeTomatoIntelligenceApp() {
+    const root = document.getElementById('tomatoIntelligenceApp');
+    if (!root) return;
+
+    const dataEl = document.getElementById('tomato-intelligence-data');
+    const metaEl = document.getElementById('tomato-intelligence-meta');
+    const modeImagesEl = document.getElementById('tomato-intelligence-mode-images');
+    let varieties = [];
+    let meta = {};
+    let modeImages = {};
+
+    try {
+        varieties = JSON.parse(dataEl?.textContent || '[]');
+        meta = JSON.parse(metaEl?.textContent || '{}');
+        modeImages = JSON.parse(modeImagesEl?.textContent || '{}');
+    } catch (error) {
+        console.error('Unable to initialize Tomato Intelligence:', error);
+        return;
+    }
+
+    if (!varieties.length) return;
+
+    const state = {
+        mode: 'buy',
+        onboarded: false,
+        query: '',
+        filter: 'all',
+        selectedId: chooseInitialVariety().id,
+        compareIds: [],
+        carouselIndex: 0,
+        reduceMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    };
+
+    const modeCopy = {
+        buy: {
+            label: 'Buy Tomatoes',
+            context: 'Where do you usually shop?',
+            options: ['Grocery Chains', 'Specialty Stores', 'Farmers Markets', 'Farm Stands', 'Grow My Own'],
+            sources: {
+                Grocery: ['Stop & Shop', 'ShopRite', 'Wegmans', 'Aldi', 'Whole Foods', 'Costco', 'Walmart'],
+                Local: ['Farmers Market', 'Farm Stand', 'CSA'],
+                Specialty: ['Italian Market', 'Specialty Market']
+            }
+        },
+        grow: {
+            label: 'Grow Tomatoes',
+            context: 'How are you planning to grow?',
+            options: ['Containers', 'Raised Beds', 'In Ground', 'Greenhouse', 'Just Exploring'],
+            sources: {
+                Growing: ['Garden Center', 'Seed Catalog', 'Grow From Seed'],
+                Local: ['Farm Stand', 'CSA', 'Farmers Market']
+            }
+        },
+        cook: {
+            label: 'Cook With Tomatoes',
+            context: 'What are you making most often?',
+            options: ['Sandwiches', 'Salads', 'Sauce', 'Roasting', 'Canning', 'General Eating'],
+            sources: {
+                Grocery: ['Whole Foods', 'Trader Joe\'s', 'Aldi', 'Costco'],
+                Local: ['Farmers Market', 'Farm Stand'],
+                Specialty: ['Italian Market', 'Specialty Market']
+            }
+        },
+        compare: {
+            label: 'Compare Varieties',
+            context: 'What matters most?',
+            options: ['Flavor', 'Growing Ease', 'Availability', 'Cooking Uses', 'All Around'],
+            sources: {
+                Research: ['Rutgers archive', 'Seed Catalog', 'Visual comparison'],
+                Local: ['Farmers Market', 'Farm Stand']
+            }
+        }
+    };
+
+    const els = {
+        onboarding: root.querySelector('[data-onboarding]'),
+        contextScreen: root.querySelector('.ti-context-screen'),
+        shell: root.querySelector('[data-shell]'),
+        adaptiveQuestion: root.querySelector('[data-adaptive-question]'),
+        search: root.querySelector('[data-search]'),
+        resultCount: root.querySelector('[data-result-count]'),
+        sourceGroups: root.querySelector('[data-source-groups]'),
+        varietyList: root.querySelector('[data-variety-list]'),
+        selectedName: root.querySelector('[data-selected-name]'),
+        selectedSummary: root.querySelector('[data-selected-summary]'),
+        selectedTags: root.querySelector('[data-selected-tags]'),
+        modeLabel: root.querySelector('[data-mode-label]'),
+        shelfCopy: root.querySelector('[data-shelf-copy]'),
+        gardenCopy: root.querySelector('[data-garden-copy]'),
+        kitchenCopy: root.querySelector('[data-kitchen-copy]'),
+        imageFrame: root.querySelector('[data-image-frame]'),
+        visualTitle: root.querySelector('[data-visual-title]'),
+        visualCopy: root.querySelector('[data-visual-copy]'),
+        axisList: root.querySelector('[data-axis-list]'),
+        radarShape: root.querySelector('[data-radar-shape]'),
+        radarDesc: root.querySelector('[data-radar-desc]'),
+        compareCount: root.querySelector('[data-compare-count]'),
+        compareItems: root.querySelector('[data-compare-items]')
+    };
+
+    root.querySelectorAll('[data-intent]').forEach(button => {
+        button.addEventListener('click', () => {
+            state.mode = button.dataset.intent || 'buy';
+            root.querySelectorAll('[data-intent]').forEach(item => item.classList.toggle('active', item === button));
+            renderAdaptiveQuestion();
+            els.contextScreen.hidden = false;
+            els.contextScreen.focus?.();
+            setAtmosphere();
+        });
+    });
+
+    root.querySelectorAll('[data-confirm-location], [data-skip-location]').forEach(button => {
+        button.addEventListener('click', enterShell);
+    });
+
+    const locationChoice = root.querySelector('[data-location-choice]');
+    if (locationChoice) {
+        locationChoice.addEventListener('click', () => {
+            renderAdaptiveQuestion('Choose a broader region', ['Northeast', 'Mid-Atlantic', 'Southeast', 'Midwest', 'West Coast']);
+        });
+    }
+
+    root.querySelectorAll('[data-mode]').forEach(button => {
+        button.addEventListener('click', () => {
+            state.mode = button.dataset.mode || 'buy';
+            state.selectedId = rankVarieties()[0]?.id || state.selectedId;
+            setAtmosphere();
+            render();
+        });
+    });
+
+    root.querySelectorAll('[data-filter]').forEach(button => {
+        button.addEventListener('click', () => {
+            state.filter = button.dataset.filter || 'all';
+            render();
+        });
+    });
+
+    if (els.search) {
+        els.search.addEventListener('input', debounce(event => {
+            state.query = event.target.value.trim().toLowerCase();
+            const top = rankVarieties()[0];
+            if (top) state.selectedId = top.id;
+            render();
+        }, 120));
+    }
+
+    const addCompare = root.querySelector('[data-add-compare]');
+    if (addCompare) {
+        addCompare.addEventListener('click', () => {
+            if (!state.compareIds.includes(state.selectedId)) {
+                state.compareIds = [...state.compareIds, state.selectedId].slice(-4);
+            }
+            renderCompare();
+        });
+    }
+
+    root.addEventListener('keydown', event => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+            event.preventDefault();
+            els.search?.focus();
+        }
+    });
+
+    renderAdaptiveQuestion();
+    setAtmosphere();
+    render();
+    if (!state.reduceMotion) {
+        window.setInterval(() => {
+            if (!state.onboarded) return;
+            state.carouselIndex += 1;
+            setAtmosphere();
+        }, 13000);
+    }
+
+    function chooseInitialVariety() {
+        return varieties.find(variety => /brandywine/i.test(variety.name || '') && variety.imageUrl)
+            || varieties.find(variety => variety.imageUrl)
+            || varieties[0];
+    }
+
+    function enterShell() {
+        state.onboarded = true;
+        els.onboarding.hidden = true;
+        els.shell.hidden = false;
+        els.search?.focus();
+        render();
+    }
+
+    function renderAdaptiveQuestion(title, options) {
+        const copy = modeCopy[state.mode] || modeCopy.buy;
+        const questionTitle = title || copy.context;
+        const choices = options || copy.options;
+        if (!els.adaptiveQuestion) return;
+        els.adaptiveQuestion.innerHTML = `
+            <h2>${escapeHtml(questionTitle)}</h2>
+            <div class="ti-choice-grid">
+                ${choices.map((choice, index) => `<button type="button" class="${index === 0 ? 'active' : ''}">${escapeHtml(choice)}</button>`).join('')}
+            </div>
+        `;
+        els.adaptiveQuestion.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', () => {
+                els.adaptiveQuestion.querySelectorAll('button').forEach(item => item.classList.toggle('active', item === button));
+            });
+        });
+    }
+
+    function setAtmosphere() {
+        const images = modeImages[state.mode] || [];
+        const a = root.querySelector('.ti-bg-a');
+        const b = root.querySelector('.ti-bg-b');
+        if (!a || !b || !images.length) return;
+        const first = images[state.carouselIndex % images.length];
+        const second = images[(state.carouselIndex + 1) % images.length];
+        a.style.backgroundImage = `url("${cssUrl(first)}")`;
+        b.style.backgroundImage = `url("${cssUrl(second)}")`;
+        root.dataset.bgPhase = state.carouselIndex % 2 ? 'b' : 'a';
+    }
+
+    function render() {
+        const selected = varieties.find(variety => variety.id === state.selectedId) || chooseInitialVariety();
+        if (!selected) return;
+        const color = selected.color || { primary: '#b8342f', secondary: '#df6a43' };
+        root.style.setProperty('--tomato-primary', color.primary);
+        root.style.setProperty('--tomato-secondary', color.secondary);
+        root.querySelectorAll('[data-mode]').forEach(button => button.classList.toggle('active', button.dataset.mode === state.mode));
+        root.querySelectorAll('[data-filter]').forEach(button => button.classList.toggle('active', button.dataset.filter === state.filter));
+        renderSources();
+        renderVarieties();
+        renderSelected(selected);
+        renderCompare();
+    }
+
+    function renderSources() {
+        const groups = modeCopy[state.mode]?.sources || modeCopy.buy.sources;
+        els.sourceGroups.innerHTML = Object.entries(groups).map(([group, items]) => `
+            <section>
+                <strong>${escapeHtml(group)}</strong>
+                <div>${items.map(item => `<span>${escapeHtml(item)}</span>`).join('')}</div>
+            </section>
+        `).join('');
+    }
+
+    function rankVarieties() {
+        return varieties
+            .filter(matchesSearch)
+            .filter(matchesFilter)
+            .map(variety => ({ ...variety, tiScore: scoreForMode(variety) }))
+            .sort((a, b) => b.tiScore - a.tiScore);
+    }
+
+    function matchesSearch(variety) {
+        if (!state.query) return true;
+        const haystack = [
+            variety.name,
+            variety.description,
+            Object.values(variety.fields || {}).join(' '),
+            (variety.taxonomy || []).join(' ')
+        ].join(' ').toLowerCase();
+        return haystack.includes(state.query);
+    }
+
+    function matchesFilter(variety) {
+        if (state.filter === 'all') return true;
+        const a = variety.attributes || {};
+        const text = `${variety.name} ${Object.values(variety.fields || {}).join(' ')}`.toLowerCase();
+        if (state.filter === 'slicer') return (a.slicing || 0) > 55 || text.includes('beefsteak');
+        if (state.filter === 'sauce') return (a.sauce || 0) > 58 || text.includes('paste') || text.includes('roma');
+        if (state.filter === 'easy') return (a.garden_ease || 0) > 55 || (a.disease_resistance || 0) > 60;
+        return true;
+    }
+
+    function scoreForMode(variety) {
+        const a = variety.attributes || {};
+        if (state.mode === 'grow') return (a.garden_ease || 0) + (a.disease_resistance || 0) * 0.75 + (a.northeast_market_likelihood || 0) * 0.2;
+        if (state.mode === 'cook') return (a.sauce || 0) + (a.sandwich || 0) * 0.6 + (a.salad || 0) * 0.5 + (a.umami || 0) * 0.3;
+        if (state.mode === 'compare') return (a.visual_drama || 0) + (a.rarity || 0) * 0.8 + (a.sweetness || 0) * 0.2;
+        return (a.market_likelihood || 0) + (a.slicing || 0) * 0.55 + (a.shelf_life || 0) * 0.3 + (variety.imageUrl ? 12 : 0);
+    }
+
+    function renderVarieties() {
+        const ranked = rankVarieties().slice(0, 38);
+        if (els.resultCount) {
+            els.resultCount.textContent = `${ranked.length.toLocaleString()} matches`;
+        }
+        els.varietyList.innerHTML = ranked.map(variety => {
+            const active = variety.id === state.selectedId ? 'active' : '';
+            return `
+                <button class="ti-variety-row ${active}" type="button" data-variety-id="${escapeHtml(variety.id)}">
+                    <span class="ti-row-swatch" style="--swatch-a:${escapeHtml(variety.color?.primary || '#b8342f')}; --swatch-b:${escapeHtml(variety.color?.secondary || '#df6a43')}"></span>
+                    <span>
+                        <strong>${escapeHtml(variety.name)}</strong>
+                        <em>${escapeHtml(rowSubtitle(variety))}</em>
+                    </span>
+                    <b>${Math.round(variety.tiScore || 0)}</b>
+                </button>
+            `;
+        }).join('');
+        els.varietyList.querySelectorAll('[data-variety-id]').forEach(button => {
+            button.addEventListener('click', () => {
+                state.selectedId = button.dataset.varietyId;
+                render();
+            });
+        });
+    }
+
+    function renderSelected(variety) {
+        const a = variety.attributes || {};
+        const fields = variety.fields || {};
+        els.modeLabel.textContent = modeCopy[state.mode]?.label || 'Buy Tomatoes';
+        els.selectedName.textContent = variety.name || 'Tomato';
+        els.selectedSummary.textContent = interpretSummary(variety);
+        els.selectedTags.innerHTML = (variety.taxonomy || []).slice(0, 6).map(tag => `<span>${escapeHtml(tag)}</span>`).join('');
+        els.shelfCopy.textContent = shelfReality(variety);
+        els.gardenCopy.textContent = gardenReality(variety);
+        els.kitchenCopy.textContent = kitchenReality(variety);
+        els.visualTitle.textContent = `${variety.name} profile`;
+        els.visualCopy.textContent = `${fields.skin_color || 'Red'} fruit, ${fields.fruit_shape || 'garden'} form, ${fields.fruit_size || 'varied'} practical size.`;
+        els.imageFrame.innerHTML = variety.imageUrl
+            ? `<img src="${escapeHtml(variety.imageUrl)}" alt="${escapeHtml(variety.imageAlt || variety.name)}" loading="lazy">`
+            : '<div class="ti-image-fallback"></div>';
+
+        const axes = fingerprint(variety);
+        els.axisList.innerHTML = axes.map(axis => `
+            <div class="ti-axis">
+                <span>${escapeHtml(axis.label)}</span>
+                <meter min="0" max="100" value="${Math.round(axis.value)}">${Math.round(axis.value)}</meter>
+            </div>
+        `).join('');
+        const points = radarPoints(axes.map(axis => axis.value));
+        els.radarShape.setAttribute('points', points);
+        els.radarDesc.textContent = axes.map(axis => `${axis.label}: ${Math.round(axis.value)}`).join('. ');
+
+        root.querySelectorAll('.ti-guidance-card').forEach(card => {
+            card.classList.toggle('active', card.dataset.guidance === activeGuidanceKey());
+        });
+    }
+
+    function activeGuidanceKey() {
+        if (state.mode === 'grow') return 'garden';
+        if (state.mode === 'cook') return 'kitchen';
+        return 'shelf';
+    }
+
+    function rowSubtitle(variety) {
+        const fields = variety.fields || {};
+        const parts = [fields.tomato_type, fields.fruit_shape, fields.season].filter(Boolean);
+        return parts.slice(0, 3).join(' · ') || 'Decision profile ready';
+    }
+
+    function interpretSummary(variety) {
+        const a = variety.attributes || {};
+        const fields = variety.fields || {};
+        if (state.mode === 'grow') {
+            return `In New York this reads as a ${seasonPhrase(fields.season)} tomato with ${difficultyPhrase(a.garden_ease)} care demands.`;
+        }
+        if (state.mode === 'cook') {
+            return `${variety.name} is strongest for ${bestKitchenUse(a)}, with ${texturePhrase(a)} texture and ${flavorPhrase(a)} flavor.`;
+        }
+        if (state.mode === 'compare') {
+            return `This variety stands out for ${compareTrait(a)} while trading against ordinary retail findability.`;
+        }
+        return `${variety.name} is best treated as ${storeEquivalent(variety)} in stores, with exact cultivar availability most likely through local or growing sources.`;
+    }
+
+    function shelfReality(variety) {
+        return `${variety.name} should not be assumed to be on a grocery shelf by cultivar name. Look for ${storeEquivalent(variety)}; for exact identity, start with farmers markets, farm stands, CSA boxes, or seed sources.`;
+    }
+
+    function gardenReality(variety) {
+        const fields = variety.fields || {};
+        return `For United States · New York, start seed planning in late winter, transplant after frost risk, and expect ${seasonPhrase(fields.season)} production. Watch humidity, cracking, and foliage disease before yield claims.`;
+    }
+
+    function kitchenReality(variety) {
+        const a = variety.attributes || {};
+        return `Best kitchen signal: ${bestKitchenUse(a)}. ${texturePhrase(a)} texture means substitutions should match structure first, then color and sweetness.`;
+    }
+
+    function storeEquivalent(variety) {
+        const fields = variety.fields || {};
+        const shape = String(fields.fruit_shape || '').toLowerCase();
+        const type = String(fields.tomato_type || '').toLowerCase();
+        if (shape.includes('cherry')) return 'cherry or grape tomato';
+        if (shape.includes('paste') || shape.includes('plum') || /roma/i.test(variety.name || '')) return 'paste or Roma-type tomato';
+        if (shape.includes('beefsteak') || Number(String(fields.fruit_size || '').match(/\d+/)?.[0] || 0) >= 10) return 'large heirloom slicer';
+        if (type.includes('heirloom')) return 'mixed heirloom tomato';
+        return 'field or slicing tomato';
+    }
+
+    function seasonPhrase(season = '') {
+        const text = String(season).toLowerCase();
+        if (text.includes('early')) return 'early-season';
+        if (text.includes('late')) return 'late-season';
+        if (text.includes('mid')) return 'mid-season';
+        return 'main-season';
+    }
+
+    function difficultyPhrase(value = 45) {
+        if (value > 70) return 'forgiving';
+        if (value > 48) return 'moderate';
+        return 'hands-on';
+    }
+
+    function texturePhrase(a) {
+        return (a.flesh_density || 0) > 66 ? 'dense and meaty' : (a.juiciness || 0) > 62 ? 'juicy and tender' : 'balanced';
+    }
+
+    function flavorPhrase(a) {
+        return (a.umami || 0) > 66 ? 'savory' : (a.sweetness || 0) > 72 ? 'sweet' : (a.acidity || 0) > 68 ? 'bright' : 'mild';
+    }
+
+    function bestKitchenUse(a) {
+        const uses = [
+            ['sauce', a.sauce || 0],
+            ['sandwiches', a.sandwich || 0],
+            ['salads', a.salad || 0],
+            ['roasting', a.roasting || 0],
+            ['canning', a.canning || 0]
+        ].sort((x, y) => y[1] - x[1]);
+        return uses[0][0];
+    }
+
+    function compareTrait(a) {
+        const traits = [
+            ['visual fingerprint', a.visual_drama || 0],
+            ['flavor intensity', (a.sweetness || 0) + (a.umami || 0)],
+            ['garden practicality', a.garden_ease || 0],
+            ['kitchen range', (a.sauce || 0) + (a.salad || 0) + (a.sandwich || 0)]
+        ].sort((x, y) => y[1] - x[1]);
+        return traits[0][0];
+    }
+
+    function fingerprint(variety) {
+        const a = variety.attributes || {};
+        return [
+            { label: 'Flavor', value: ((a.sweetness || 0) + (a.umami || 0) + (a.acidity || 0)) / 3 },
+            { label: 'Kitchen', value: ((a.sauce || 0) + (a.salad || 0) + (a.sandwich || 0)) / 3 },
+            { label: 'Garden', value: ((a.garden_ease || 0) + (a.disease_resistance || 0)) / 2 },
+            { label: 'Texture', value: ((a.juiciness || 0) + (a.flesh_density || 0)) / 2 },
+            { label: 'Findability', value: a.market_likelihood || 0 },
+            { label: 'Practicality', value: ((a.shelf_life || 0) + (a.container_fit || 0) + (a.canning || 0)) / 3 }
+        ];
+    }
+
+    function radarPoints(values) {
+        const center = 110;
+        const maxRadius = 84;
+        return values.map((value, index) => {
+            const angle = (-90 + index * 60) * Math.PI / 180;
+            const radius = maxRadius * clampNumber(value || 0, 8, 100) / 100;
+            return `${center + Math.cos(angle) * radius},${center + Math.sin(angle) * radius}`;
+        }).join(' ');
+    }
+
+    function renderCompare() {
+        const selected = state.compareIds.map(id => varieties.find(variety => variety.id === id)).filter(Boolean);
+        els.compareCount.textContent = `${selected.length} selected`;
+        els.compareItems.innerHTML = selected.map(variety => `
+            <button type="button" data-compare-id="${escapeHtml(variety.id)}">
+                <span style="--swatch-a:${escapeHtml(variety.color?.primary || '#b8342f')}; --swatch-b:${escapeHtml(variety.color?.secondary || '#df6a43')}"></span>
+                ${escapeHtml(variety.name)}
+            </button>
+        `).join('');
+        els.compareItems.querySelectorAll('[data-compare-id]').forEach(button => {
+            button.addEventListener('click', () => {
+                state.selectedId = button.dataset.compareId;
+                render();
+            });
+        });
+    }
+
+    function cssUrl(value) {
+        return String(value || '').replace(/["\\]/g, '');
+    }
 }
 
 function initializeSearch() {

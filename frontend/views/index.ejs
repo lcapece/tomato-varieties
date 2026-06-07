@@ -1,6 +1,6 @@
 <%
-const title = 'Tomato Atlas Toy';
-const mainClass = 'tomato-toy-main';
+const title = 'Tomato Intelligence Platform';
+const mainClass = 'tomato-intelligence-main';
 const hideFooter = true;
 const h = value => String(value ?? '').replace(/[&<>"']/g, char => ({
     '&': '&amp;',
@@ -9,175 +9,196 @@ const h = value => String(value ?? '').replace(/[&<>"']/g, char => ({
     '"': '&quot;',
     "'": '&#39;'
 }[char]));
-const allToyVarieties = toyVarieties || [];
-const featured = allToyVarieties.find(variety => variety.imageUrl) || allToyVarieties[0] || {};
-const safeToyData = JSON.stringify(allToyVarieties).replace(/</g, '\\u003c');
-const safeToyMeta = JSON.stringify({
-    totalCount: totalCount || allToyVarieties.length,
+const allVarieties = toyVarieties || [];
+const featured = allVarieties.find(variety => /brandywine/i.test(variety.name || '') && variety.imageUrl)
+    || allVarieties.find(variety => variety.imageUrl)
+    || allVarieties[0]
+    || {};
+const safeData = JSON.stringify(allVarieties).replace(/</g, '\\u003c');
+const safeMeta = JSON.stringify({
+    totalCount: totalCount || allVarieties.length,
     scrapedAt,
     source,
-    stats: toyStats || {}
+    region: 'United States · New York',
+    imagePolicy: 'Supabase private storage with signed URL delivery is the target production image path.'
 }).replace(/</g, '\\u003c');
-const mealOptions = [
-    ['sauce', 'Sauce'],
-    ['salad', 'Salad'],
-    ['sandwich', 'Sandwich'],
-    ['salsa', 'Salsa'],
-    ['pizza', 'Pizza'],
-    ['soup', 'Soup'],
-    ['canning', 'Canning'],
-    ['roasting', 'Roasted'],
-    ['fine_dining', 'Fine plate'],
-    ['snack', 'Snack']
-];
-const body = `
-<section id="tomatoToy" class="tomato-toy" style="--tomato-primary: ${h(featured.color?.primary || '#b7352c')}; --tomato-secondary: ${h(featured.color?.secondary || '#e35b3f')};">
-    <script id="tomato-toy-data" type="application/json">${safeToyData}</script>
-    <script id="tomato-toy-meta" type="application/json">${safeToyMeta}</script>
 
-    ${allToyVarieties.length === 0 ? `
-        <div class="toy-empty-state">
-            <p class="eyebrow">No varieties loaded</p>
-            <h1>The tomato toy needs data first.</h1>
-            <p>Run <code>cd backend && python scraper.py</code>, then restart the API server.</p>
+const imagePool = allVarieties.filter(variety => variety.imageUrl).slice(0, 16);
+const modeImages = {
+    buy: ['/images/generated/tomato-bg-buy.png', ...imagePool.slice(0, 3).map(variety => variety.imageUrl)],
+    grow: ['/images/generated/tomato-bg-grow.png', ...imagePool.slice(4, 7).map(variety => variety.imageUrl)],
+    cook: ['/images/generated/tomato-bg-cook.png', ...imagePool.slice(8, 11).map(variety => variety.imageUrl)],
+    compare: ['/images/generated/tomato-bg-compare.png', ...imagePool.slice(12, 15).map(variety => variety.imageUrl)]
+};
+const safeModeImages = JSON.stringify(modeImages).replace(/</g, '\\u003c');
+
+const body = `
+<section id="tomatoIntelligenceApp" class="tomato-intelligence-app" style="--tomato-primary: ${h(featured.color?.primary || '#b8342f')}; --tomato-secondary: ${h(featured.color?.secondary || '#df6a43')};">
+    <script id="tomato-intelligence-data" type="application/json">${safeData}</script>
+    <script id="tomato-intelligence-meta" type="application/json">${safeMeta}</script>
+    <script id="tomato-intelligence-mode-images" type="application/json">${safeModeImages}</script>
+
+    ${allVarieties.length === 0 ? `
+        <div class="ti-empty-state">
+            <p class="ti-eyebrow">Data unavailable</p>
+            <h1>Tomato intelligence needs the backend archive first.</h1>
+            <p>Start the Python API and refresh this app shell.</p>
         </div>
     ` : `
-        <div class="toy-topline">
-            <a class="toy-brand" href="/" aria-label="Tomato Atlas Toy home">
-                <span class="brand-mark"></span>
-                <span>Tomato Atlas Toy</span>
-            </a>
-            <div class="toy-meta-strip">
-                <span>${h(totalCount || allToyVarieties.length)} varieties</span>
-                <span>${h(toyStats?.attributeCount || 52)} attributes</span>
-                <span>${h(toyStats?.imageCount || 0)} Commons photos</span>
-            </div>
+        <div class="ti-atmosphere" aria-hidden="true">
+            <div class="ti-bg ti-bg-a"></div>
+            <div class="ti-bg ti-bg-b"></div>
+            <div class="ti-bg-overlay"></div>
         </div>
 
-        <div class="toy-workspace">
-            <section class="tomato-stage" aria-labelledby="stage-title">
-                <div class="stage-copy">
-                    <p class="eyebrow">Interactive specimen finder</p>
-                    <h1 id="stage-title">Drag flavor, season, shape, and meal intent until one tomato turns into another.</h1>
+        <div class="ti-onboarding" data-onboarding>
+            <section class="ti-intent-screen" aria-labelledby="intent-title">
+                <div class="ti-onboarding-copy">
+                    <p class="ti-eyebrow">Tomato Intelligence</p>
+                    <h1 id="intent-title">What are you here to do today?</h1>
                 </div>
-
-                <div class="morph-lab" aria-live="polite">
-                    <div class="morph-specimen" id="morphSpecimen" role="img" aria-label="Morphing tomato specimen">
-                        <span class="rib rib-one"></span>
-                        <span class="rib rib-two"></span>
-                        <span class="rib rib-three"></span>
-                        <span class="tomato-gloss"></span>
-                    </div>
-                    <div class="morph-orbit" aria-hidden="true">
-                        <span>sweetness</span>
-                        <span>density</span>
-                        <span>season</span>
-                        <span>rarity</span>
-                    </div>
-                </div>
-
-                <div class="selected-specimen">
-                    <div class="selected-image" id="selectedImageWrap">
-                        ${featured.imageUrl ? `<img id="selectedImage" src="${h(featured.imageUrl)}" alt="${h(featured.imageAlt || featured.name)}">` : `<div id="selectedImage" class="image-fallback"></div>`}
-                    </div>
-                    <div>
-                        <p class="eyebrow" id="selectedSource">${h(featured.imageSource || 'Image pending')}</p>
-                        <h2 id="selectedName">${h(featured.name || 'Tomato')}</h2>
-                        <p id="selectedDescription">${h(featured.description || 'Move the controls to discover a better match.')}</p>
-                        <div class="selected-tags" id="selectedTags"></div>
-                        <div class="attribute-fingerprint" id="selectedFingerprint" aria-label="Selected tomato attribute fingerprint"></div>
-                    </div>
+                <div class="ti-intent-grid" role="list">
+                    <button class="ti-intent-card" type="button" data-intent="buy">
+                        <span aria-hidden="true">⌕</span>
+                        <strong>Buy Tomatoes</strong>
+                        <em>Find types, sources, and practical substitutes.</em>
+                    </button>
+                    <button class="ti-intent-card" type="button" data-intent="grow">
+                        <span aria-hidden="true">⌁</span>
+                        <strong>Grow Tomatoes</strong>
+                        <em>Plan planting, care, and harvest timing.</em>
+                    </button>
+                    <button class="ti-intent-card" type="button" data-intent="cook">
+                        <span aria-hidden="true">◒</span>
+                        <strong>Cook With Tomatoes</strong>
+                        <em>Choose by flavor, texture, and kitchen use.</em>
+                    </button>
+                    <button class="ti-intent-card" type="button" data-intent="compare">
+                        <span aria-hidden="true">◇</span>
+                        <strong>Compare Varieties</strong>
+                        <em>Study tradeoffs side by side.</em>
+                    </button>
                 </div>
             </section>
 
-            <aside class="toy-controls" aria-label="Tomato finder controls">
-                <div class="control-header">
-                    <p class="eyebrow">Perfect Tomato Finder</p>
-                    <button class="icon-action" type="button" id="perfectFinderBtn" title="Find the most surprising match">
-                        <i class="fas fa-wand-magic-sparkles"></i>
-                    </button>
-                </div>
-
-                <label class="search-field">
-                    <span>Search the archive</span>
-                    <input id="toySearch" type="search" placeholder="Cherokee, striped, paste, sweet...">
-                </label>
-
-                <div class="axis-row">
-                    <div class="axis-pad" data-axis-pad="flavor" aria-label="Flavor four-way access control">
-                        <button class="axis-thumb" type="button" aria-label="Flavor thumb"></button>
-                        <span class="axis-label top">Juicy</span>
-                        <span class="axis-label right">Sweet</span>
-                        <span class="axis-label bottom">Meaty</span>
-                        <span class="axis-label left">Tart</span>
+            <section class="ti-context-screen" aria-labelledby="context-title" hidden>
+                <div class="ti-context-panel">
+                    <p class="ti-eyebrow">Context confirmation</p>
+                    <h1 id="context-title">Let's tailor this for you</h1>
+                    <p class="ti-location-copy">Looks like you're in <strong>United States · New York</strong></p>
+                    <div class="ti-location-actions">
+                        <button type="button" class="ti-primary" data-confirm-location>Use New York</button>
+                        <button type="button" class="ti-secondary" data-location-choice>Choose another location</button>
+                        <button type="button" class="ti-plain" data-skip-location>Skip</button>
                     </div>
-                    <div class="axis-pad" data-axis-pad="garden" aria-label="Season and plant four-way access control">
-                        <button class="axis-thumb" type="button" aria-label="Garden thumb"></button>
-                        <span class="axis-label top">Early</span>
-                        <span class="axis-label right">Sprawl</span>
-                        <span class="axis-label bottom">Late</span>
-                        <span class="axis-label left">Pot</span>
-                    </div>
+                    <div class="ti-adaptive-question" data-adaptive-question></div>
                 </div>
-
-                <div class="range-bank">
-                    <label>
-                        <span>Bitter to sweet</span>
-                        <input id="sweetnessRange" type="range" min="0" max="100" value="68">
-                    </label>
-                    <label>
-                        <span>Visual strangeness</span>
-                        <input id="dramaRange" type="range" min="0" max="100" value="52">
-                    </label>
-                    <label>
-                        <span>Garden forgiveness</span>
-                        <input id="easeRange" type="range" min="0" max="100" value="48">
-                    </label>
-                </div>
-
-                <div class="select-grid">
-                    <label>
-                        <span>Location</span>
-                        <select id="locationSelect">
-                            <option value="any">Anywhere</option>
-                            <option value="northeast">Northeast summer</option>
-                            <option value="humid">Humid garden</option>
-                            <option value="hot">Hot patio</option>
-                            <option value="cool">Cool short season</option>
-                            <option value="container">Container balcony</option>
-                        </select>
-                    </label>
-                    <label>
-                        <span>Time of year</span>
-                        <select id="seasonSelect">
-                            <option value="any">Any season</option>
-                            <option value="spring">Spring planning</option>
-                            <option value="early">Early harvest</option>
-                            <option value="peak">Peak summer</option>
-                            <option value="late">Late season</option>
-                            <option value="winter">Winter pantry</option>
-                        </select>
-                    </label>
-                </div>
-
-                <div class="meal-selector" role="group" aria-label="Meal selector">
-                    ${mealOptions.map(([value, label], index) => `
-                        <button type="button" class="meal-chip ${index === 0 ? 'active' : ''}" data-meal="${value}">${label}</button>
-                    `).join('')}
-                </div>
-            </aside>
+            </section>
         </div>
 
-        <section class="result-panel" aria-labelledby="results-title">
-            <div class="result-heading">
-                <div>
-                    <p class="eyebrow">Live ranking</p>
-                    <h2 id="results-title">Best matches right now</h2>
-                </div>
-                <div class="result-count" id="resultCount"></div>
+        <div class="ti-shell" data-shell hidden>
+            <header class="ti-topbar">
+                <a class="ti-brand" href="/" aria-label="Tomato Intelligence Platform">
+                    <span class="ti-brand-mark" aria-hidden="true"></span>
+                    <span>Tomato Intelligence</span>
+                </a>
+                <label class="ti-search">
+                    <span class="sr-only">Search tomato varieties, traits, and uses</span>
+                    <input data-search type="search" placeholder="Search varieties, traits, uses..." autocomplete="off">
+                </label>
+                <nav class="ti-mode-switcher" aria-label="Current intent">
+                    <button type="button" data-mode="buy">Buy</button>
+                    <button type="button" data-mode="grow">Grow</button>
+                    <button type="button" data-mode="cook">Cook</button>
+                    <button type="button" data-mode="compare">Compare</button>
+                </nav>
+                <button type="button" class="ti-chip-button" data-location-panel>United States · New York</button>
+                <button type="button" class="ti-chip-button" data-sources-panel>Sources</button>
+                <button type="button" class="ti-icon-button" data-favorites aria-label="Favorites">♡</button>
+            </header>
+
+            <div class="ti-main-canvas">
+                <aside class="ti-left-panel" aria-label="Tomato search and filters">
+                    <div class="ti-panel-head">
+                        <p class="ti-eyebrow">Discovery</p>
+                        <strong data-result-count>${h(allVarieties.length)} varieties</strong>
+                    </div>
+                    <div class="ti-filter-tabs" role="group" aria-label="Filter tomatoes">
+                        <button type="button" data-filter="all">All</button>
+                        <button type="button" data-filter="slicer">Slicer</button>
+                        <button type="button" data-filter="sauce">Sauce</button>
+                        <button type="button" data-filter="easy">Easy</button>
+                    </div>
+                    <div class="ti-source-groups" data-source-groups></div>
+                    <div class="ti-variety-list" data-variety-list></div>
+                </aside>
+
+                <main class="ti-center-panel" aria-live="polite">
+                    <section class="ti-hero-card">
+                        <p class="ti-eyebrow" data-mode-label>Buy Tomatoes</p>
+                        <h1 data-selected-name>${h(featured.name || 'Tomato')}</h1>
+                        <p data-selected-summary>${h(featured.description || 'A cataloged tomato variety ready for practical decision support.')}</p>
+                        <div class="ti-tag-row" data-selected-tags></div>
+                    </section>
+
+                    <section class="ti-intelligence-grid">
+                        <article class="ti-guidance-card" data-guidance="shelf">
+                            <span>Shelf Reality</span>
+                            <h2>Stores sell tomato types, not guaranteed cultivars.</h2>
+                            <p data-shelf-copy></p>
+                        </article>
+                        <article class="ti-guidance-card" data-guidance="garden">
+                            <span>Garden Reality</span>
+                            <h2>Regional timing matters more than catalog optimism.</h2>
+                            <p data-garden-copy></p>
+                        </article>
+                        <article class="ti-guidance-card" data-guidance="kitchen">
+                            <span>Kitchen Reality</span>
+                            <h2>Flavor and texture decide the right use.</h2>
+                            <p data-kitchen-copy></p>
+                        </article>
+                    </section>
+
+                    <section class="ti-score-panel" aria-labelledby="score-title">
+                        <div>
+                            <p class="ti-eyebrow">Decision fingerprint</p>
+                            <h2 id="score-title">Six practical axes</h2>
+                        </div>
+                        <div class="ti-radar-wrap">
+                            <svg class="ti-radar" viewBox="0 0 220 220" role="img" aria-labelledby="radar-title radar-desc">
+                                <title id="radar-title">Tomato fingerprint radar</title>
+                                <desc id="radar-desc" data-radar-desc>Accessible score summary updates when a variety is selected.</desc>
+                                <polygon class="ti-radar-grid" points="110,18 187,62 187,150 110,194 33,150 33,62"></polygon>
+                                <polygon class="ti-radar-mid" points="110,48 161,77 161,135 110,164 59,135 59,77"></polygon>
+                                <polygon class="ti-radar-shape" data-radar-shape points="110,42 160,82 158,136 110,168 60,136 62,82"></polygon>
+                            </svg>
+                            <div class="ti-axis-list" data-axis-list></div>
+                        </div>
+                    </section>
+                </main>
+
+                <aside class="ti-right-panel" aria-label="Visual tomato identity">
+                    <div class="ti-image-frame" data-image-frame>
+                        ${featured.imageUrl ? `<img src="${h(featured.imageUrl)}" alt="${h(featured.imageAlt || featured.name || 'Tomato variety')}" loading="eager">` : `<div class="ti-image-fallback"></div>`}
+                    </div>
+                    <div class="ti-visual-card">
+                        <p class="ti-eyebrow">Visual identity</p>
+                        <h2 data-visual-title>${h(featured.name || 'Tomato')}</h2>
+                        <p data-visual-copy></p>
+                        <small data-image-policy>Production images should resolve through private Supabase buckets and signed URLs.</small>
+                    </div>
+                </aside>
             </div>
-            <div class="tomato-results" id="tomatoResults"></div>
-        </section>
+
+            <footer class="ti-compare-tray" aria-label="Compare queue">
+                <div>
+                    <span>Compare Queue</span>
+                    <strong data-compare-count>0 selected</strong>
+                </div>
+                <div class="ti-compare-items" data-compare-items></div>
+                <button type="button" class="ti-primary" data-add-compare>Add current</button>
+            </footer>
+        </div>
     `}
 </section>
 `;

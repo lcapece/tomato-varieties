@@ -199,6 +199,18 @@ function deriveAttributes(fields, variety, index) {
     const dark = hasAny(`${fields.skin_color} ${fields.flesh_color}`, ['black', 'purple', 'brown']);
     const striped = hasAny(lower, ['stripe', 'striped', 'bi-color', 'bicolor', 'zebra']);
     const disease = fields.disease_resistance ? 78 : hasAny(lower, ['resistant', 'wilt', 'nematode']) ? 66 : 28;
+    const market = deriveMarketAvailability(fields, {
+        type,
+        breed,
+        season,
+        plantType,
+        disease,
+        earlySeason: season.includes('early'),
+        lateSeason: season.includes('late'),
+        paste,
+        cherry,
+        beefsteak
+    });
 
     const visualDrama = clamp(
         (striped ? 34 : 0) +
@@ -238,6 +250,12 @@ function deriveAttributes(fields, variety, index) {
         crack_resistance: clamp(36 + (hasAny(lower, ['crack resistant', 'crack']) ? 24 : 0) + (disease > 60 ? 12 : 0)),
         container_fit: clamp(compact + (numberFrom(fields.plant_height) && numberFrom(fields.plant_height) <= 3 ? 18 : 0)),
         garden_ease: clamp(42 + (plantType.includes('determinate') ? 18 : 0) + (disease > 60 ? 18 : 0) + (breed.includes('hybrid') ? 8 : 0)),
+        market_likelihood: market.overall,
+        northeast_market_likelihood: market.northeast,
+        humid_market_likelihood: market.humid,
+        hot_market_likelihood: market.hot,
+        cool_market_likelihood: market.cool,
+        container_market_likelihood: market.container,
         shelf_life: clamp(40 + (hasAny(lower, ['commercial', 'firm', 'storage', 'shipping']) ? 26 : 0) + (paste ? 10 : 0)),
         sauce: clamp(36 + (paste ? 42 : 0) + (meaty ? 18 : 0) + (juiciness < 45 ? 10 : 0)),
         slicing: clamp(38 + (beefsteak ? 38 : 0) + (shape.includes('globe') ? 18 : 0) + (sizeOz && sizeOz >= 8 ? 14 : 0)),
@@ -258,6 +276,58 @@ function slicingScoreBonus(shape, sizeOz) {
     if (shape.includes('round') || shape.includes('flattened')) bonus += 12;
     if (sizeOz && sizeOz >= 6) bonus += 12;
     return bonus;
+}
+
+function deriveMarketAvailability(fields, context) {
+    const availability = compactText(fields.availability || '').toLowerCase();
+    const origin = compactText(fields.origin || '').toLowerCase();
+    const usage = compactText(fields.usage || '').toLowerCase();
+    const type = context.type || '';
+    const breed = context.breed || '';
+
+    let base = 30;
+    if (availability.includes('commercial')) base += 28;
+    if (availability.includes('seed exchange')) base -= 8;
+    if (type.includes('commercial')) base += 24;
+    if (type.includes('garden')) base += 10;
+    if (type.includes('heirloom')) base -= 10;
+    if (type.includes('specialty')) base -= 6;
+    if (breed.includes('hybrid')) base += 10;
+    if (context.cherry || context.beefsteak || context.paste) base += 8;
+    if (usage.includes('fresh')) base += 5;
+    if (context.disease > 60) base += 8;
+
+    const northeast = base
+        + (origin.includes('usa') || origin.includes('new jersey') || origin.includes('pennsylvania') ? 10 : 0)
+        + (context.earlySeason ? 8 : 0)
+        + (context.lateSeason ? -6 : 0)
+        + (context.disease > 60 ? 8 : 0);
+
+    const humid = base
+        + (context.disease > 60 ? 14 : -6)
+        + (availability.includes('commercial') ? 6 : 0);
+
+    const hot = base
+        + (origin.includes('texas') || origin.includes('florida') || origin.includes('mexico') ? 14 : 0)
+        + (context.lateSeason ? 5 : 0)
+        + (context.earlySeason ? -4 : 0);
+
+    const cool = base
+        + (context.earlySeason ? 14 : -4)
+        + (origin.includes('russia') || origin.includes('canada') || origin.includes('siberia') ? 12 : 0);
+
+    const container = base
+        + (context.plantType.includes('determinate') ? 14 : -5)
+        + (context.cherry ? 8 : 0);
+
+    return {
+        overall: clamp(base),
+        northeast: clamp(northeast),
+        humid: clamp(humid),
+        hot: clamp(hot),
+        cool: clamp(cool),
+        container: clamp(container)
+    };
 }
 
 function enhanceVariety(variety, index) {

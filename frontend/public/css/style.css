@@ -1592,3 +1592,746 @@ body:has(.tomato-toy) .navbar-nav {
     }
 }
 
+/* Tomato Intelligence Platform SPA */
+body:has(.tomato-intelligence-app) {
+    margin: 0;
+    overflow: hidden;
+    background: #090d0e;
+    color: #f7f2ea;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body:has(.tomato-intelligence-app) .navbar {
+    display: none;
+}
+
+.tomato-intelligence-main {
+    width: 100vw;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    background: #090d0e;
+    overflow: hidden;
+}
+
+.tomato-intelligence-app,
+.ti-shell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.tomato-intelligence-app {
+    --glass: rgba(10, 18, 19, 0.72);
+    --line: rgba(255, 255, 255, 0.13);
+    --muted: rgba(247, 242, 234, 0.66);
+}
+
+.ti-atmosphere,
+.ti-bg,
+.ti-bg-overlay {
+    position: absolute;
+    inset: 0;
+}
+
+.ti-atmosphere {
+    z-index: 0;
+    background: #090d0e;
+}
+
+.ti-bg {
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity 1.8s ease;
+}
+
+.tomato-intelligence-app[data-bg-phase="a"] .ti-bg-a,
+.tomato-intelligence-app[data-bg-phase="b"] .ti-bg-b {
+    opacity: 0.38;
+}
+
+.ti-bg-overlay {
+    background:
+        linear-gradient(90deg, rgba(8, 13, 14, 0.95), rgba(8, 13, 14, 0.7) 44%, rgba(8, 13, 14, 0.36)),
+        radial-gradient(circle at 74% 18%, rgba(210, 76, 45, 0.22), transparent 36%),
+        linear-gradient(180deg, rgba(8, 13, 14, 0.12), rgba(8, 13, 14, 0.94));
+}
+
+.ti-onboarding,
+.ti-shell {
+    position: relative;
+    z-index: 1;
+}
+
+.ti-onboarding {
+    display: grid;
+    min-height: 100%;
+    padding: clamp(22px, 4vw, 56px);
+}
+
+.ti-intent-screen,
+.ti-context-screen {
+    align-self: center;
+    justify-self: center;
+    width: min(1180px, 100%);
+}
+
+.ti-onboarding-copy {
+    max-width: 650px;
+    margin-bottom: 30px;
+}
+
+.ti-eyebrow {
+    margin: 0 0 8px;
+    color: #f0a177;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.ti-intent-screen h1,
+.ti-context-panel h1 {
+    margin: 0;
+    max-width: 780px;
+    color: #fff8ef;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.8rem, 6vw, 5.9rem);
+    line-height: 0.96;
+    letter-spacing: 0;
+}
+
+.ti-intent-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.ti-intent-card,
+.ti-context-panel,
+.ti-left-panel,
+.ti-center-panel,
+.ti-right-panel,
+.ti-topbar,
+.ti-compare-tray {
+    border: 1px solid var(--line);
+    background: var(--glass);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(24px) saturate(125%);
+}
+
+.ti-intent-card {
+    min-height: 245px;
+    padding: 24px;
+    border-radius: 26px;
+    color: #fff8ef;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.ti-intent-card:hover,
+.ti-intent-card:focus-visible,
+.ti-intent-card.active {
+    transform: translateY(-4px);
+    border-color: rgba(240, 161, 119, 0.8);
+    background: rgba(36, 28, 24, 0.78);
+}
+
+.ti-intent-card span {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    margin-bottom: auto;
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 999px;
+    color: #f0a177;
+    font-size: 1.35rem;
+}
+
+.ti-intent-card strong {
+    margin-bottom: 9px;
+    font-size: 1.28rem;
+    letter-spacing: 0;
+}
+
+.ti-intent-card em,
+.ti-variety-row em,
+.ti-visual-card small {
+    color: var(--muted);
+    font-style: normal;
+}
+
+.ti-context-panel {
+    width: min(740px, 100%);
+    padding: clamp(26px, 5vw, 54px);
+    border-radius: 30px;
+}
+
+.ti-location-copy {
+    margin: 20px 0;
+    color: var(--muted);
+    font-size: 1.06rem;
+}
+
+.ti-location-copy strong {
+    color: #fff8ef;
+}
+
+.ti-location-actions,
+.ti-choice-grid,
+.ti-filter-tabs,
+.ti-tag-row,
+.ti-mode-switcher,
+.ti-compare-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ti-primary,
+.ti-secondary,
+.ti-plain,
+.ti-chip-button,
+.ti-icon-button,
+.ti-mode-switcher button,
+.ti-filter-tabs button,
+.ti-choice-grid button,
+.ti-compare-items button {
+    min-height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0 14px;
+    color: #fff8ef;
+    background: rgba(255, 255, 255, 0.08);
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.ti-primary {
+    border-color: rgba(240, 161, 119, 0.8);
+    background: linear-gradient(135deg, var(--tomato-primary), var(--tomato-secondary));
+}
+
+.ti-secondary:hover,
+.ti-chip-button:hover,
+.ti-icon-button:hover,
+.ti-mode-switcher button.active,
+.ti-filter-tabs button.active,
+.ti-choice-grid button.active {
+    border-color: rgba(240, 161, 119, 0.75);
+    background: rgba(240, 161, 119, 0.18);
+}
+
+.ti-plain {
+    color: var(--muted);
+    background: transparent;
+}
+
+.ti-adaptive-question {
+    margin-top: 28px;
+}
+
+.ti-adaptive-question h2 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+}
+
+.ti-shell {
+    display: grid;
+    grid-template-rows: 64px minmax(0, 1fr) 74px;
+    gap: 10px;
+    padding: 10px;
+}
+
+.ti-topbar {
+    display: grid;
+    grid-template-columns: 220px minmax(240px, 1fr) auto auto auto 44px;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 22px;
+}
+
+.ti-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff8ef;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.ti-brand-mark,
+.ti-row-swatch,
+.ti-compare-items span {
+    background: radial-gradient(circle at 35% 28%, var(--swatch-b, var(--tomato-secondary)), var(--swatch-a, var(--tomato-primary)) 68%);
+}
+
+.ti-brand-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    box-shadow: inset -7px -8px 14px rgba(0, 0, 0, 0.28);
+}
+
+.ti-search input {
+    width: 100%;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 0 18px;
+    color: #fff8ef;
+    background: rgba(255, 255, 255, 0.08);
+    outline: none;
+}
+
+.ti-search input:focus-visible,
+button:focus-visible,
+.ti-variety-row:focus-visible {
+    outline: 2px solid rgba(240, 161, 119, 0.9);
+    outline-offset: 2px;
+}
+
+.ti-main-canvas {
+    display: grid;
+    grid-template-columns: 310px minmax(430px, 1fr) 370px;
+    min-height: 0;
+    gap: 10px;
+}
+
+.ti-left-panel,
+.ti-center-panel,
+.ti-right-panel {
+    min-height: 0;
+    border-radius: 26px;
+}
+
+.ti-left-panel {
+    display: grid;
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    gap: 14px;
+    padding: 16px;
+}
+
+.ti-panel-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.ti-panel-head strong {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.ti-source-groups {
+    display: grid;
+    gap: 8px;
+}
+
+.ti-source-groups section {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ti-source-groups strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #fff8ef;
+    font-size: 0.78rem;
+}
+
+.ti-source-groups div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.ti-source-groups span,
+.ti-tag-row span {
+    border-radius: 999px;
+    padding: 4px 8px;
+    color: rgba(255, 248, 239, 0.78);
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 0.74rem;
+}
+
+.ti-variety-list {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    min-height: 0;
+    overflow: auto;
+    padding-right: 2px;
+}
+
+.ti-variety-row {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    padding: 9px;
+    color: #fff8ef;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.ti-variety-row.active,
+.ti-variety-row:hover {
+    border-color: rgba(240, 161, 119, 0.55);
+    background: rgba(240, 161, 119, 0.13);
+}
+
+.ti-row-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.ti-variety-row strong,
+.ti-variety-row em {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ti-variety-row strong {
+    font-size: 0.9rem;
+}
+
+.ti-variety-row em {
+    font-size: 0.72rem;
+}
+
+.ti-variety-row b {
+    color: #f0a177;
+    font-size: 0.78rem;
+}
+
+.ti-center-panel {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    gap: 10px;
+    padding: 16px;
+    overflow: hidden;
+}
+
+.ti-hero-card {
+    padding: 16px 18px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.ti-hero-card h1 {
+    margin: 0;
+    color: #fff8ef;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.8rem, 5vw, 5.4rem);
+    line-height: 0.95;
+    letter-spacing: 0;
+}
+
+.ti-hero-card p:not(.ti-eyebrow) {
+    width: min(790px, 100%);
+    margin: 12px 0;
+    color: rgba(255, 248, 239, 0.78);
+    font-size: 1.02rem;
+}
+
+.ti-intelligence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.ti-guidance-card {
+    min-height: 142px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.ti-guidance-card.active {
+    border-color: rgba(240, 161, 119, 0.55);
+    background: rgba(240, 161, 119, 0.12);
+}
+
+.ti-guidance-card span {
+    color: #f0a177;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.ti-guidance-card h2 {
+    margin: 7px 0;
+    color: #fff8ef;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.ti-guidance-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.4;
+}
+
+.ti-score-panel {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 20px;
+    min-height: 0;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.ti-score-panel h2 {
+    margin: 0;
+    color: #fff8ef;
+    font-size: 1.4rem;
+}
+
+.ti-radar-wrap {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    min-height: 0;
+}
+
+.ti-radar {
+    width: 220px;
+    height: 220px;
+}
+
+.ti-radar-grid,
+.ti-radar-mid {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.18);
+    stroke-width: 1;
+}
+
+.ti-radar-shape {
+    fill: rgba(184, 52, 47, 0.5);
+    stroke: #f0a177;
+    stroke-width: 2;
+}
+
+.ti-axis-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.ti-axis {
+    display: grid;
+    gap: 5px;
+}
+
+.ti-axis span {
+    color: rgba(255, 248, 239, 0.82);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.ti-axis meter {
+    width: 100%;
+    height: 9px;
+}
+
+.ti-right-panel {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 10px;
+}
+
+.ti-image-frame {
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    border-radius: 22px;
+    background: radial-gradient(circle at 40% 24%, var(--tomato-secondary), var(--tomato-primary) 62%, #15100e);
+}
+
+.ti-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ti-image-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.38));
+    pointer-events: none;
+}
+
+.ti-image-fallback {
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 38% 33%, rgba(255, 255, 255, 0.26), transparent 9%),
+        radial-gradient(circle at 48% 48%, var(--tomato-secondary), var(--tomato-primary) 64%, #4f1814);
+}
+
+.ti-visual-card {
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.ti-visual-card h2 {
+    margin: 0 0 6px;
+    color: #fff8ef;
+    font-size: 1.12rem;
+}
+
+.ti-visual-card p {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-size: 0.86rem;
+}
+
+.ti-compare-tray {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 22px;
+}
+
+.ti-compare-tray span,
+.ti-compare-tray strong {
+    display: block;
+}
+
+.ti-compare-tray span {
+    color: var(--muted);
+    font-size: 0.76rem;
+}
+
+.ti-compare-tray strong {
+    color: #fff8ef;
+}
+
+.ti-compare-items {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ti-compare-items button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 190px;
+}
+
+.ti-compare-items span {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+}
+
+.ti-empty-state {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-content: center;
+    height: 100%;
+    padding: 40px;
+    color: #fff8ef;
+}
+
+.ti-empty-state h1 {
+    max-width: 640px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 4rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ti-bg,
+    .ti-intent-card {
+        transition: none;
+    }
+}
+
+@media (max-width: 1180px) {
+    body:has(.tomato-intelligence-app) {
+        overflow: auto;
+    }
+
+    .tomato-intelligence-main,
+    .tomato-intelligence-app {
+        min-height: 100dvh;
+        height: auto;
+    }
+
+    .ti-shell {
+        min-height: 100dvh;
+        height: auto;
+        grid-template-rows: auto auto auto;
+    }
+
+    .ti-topbar,
+    .ti-main-canvas,
+    .ti-score-panel,
+    .ti-radar-wrap,
+    .ti-compare-tray {
+        grid-template-columns: 1fr;
+    }
+
+    .ti-left-panel,
+    .ti-center-panel,
+    .ti-right-panel {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 760px) {
+    .ti-onboarding,
+    .ti-shell {
+        padding: 8px;
+    }
+
+    .ti-intent-grid,
+    .ti-intelligence-grid,
+    .ti-axis-list {
+        grid-template-columns: 1fr;
+    }
+
+    .ti-intent-card {
+        min-height: 150px;
+    }
+
+    .ti-mode-switcher,
+    .ti-chip-button {
+        width: 100%;
+    }
+
+    .ti-mode-switcher button {
+        flex: 1;
+    }
+}
+
