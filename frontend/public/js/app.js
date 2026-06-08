@@ -60,7 +60,7 @@ function initializeTomatoIntelligenceApp() {
 
     const state = {
         mode: 'buy',
-        onboarded: false,
+        onboarded: true,
         query: '',
         filter: 'all',
         selectedId: chooseInitialVariety().id,
@@ -219,7 +219,7 @@ function initializeTomatoIntelligenceApp() {
 
     function enterShell() {
         state.onboarded = true;
-        els.onboarding.hidden = true;
+        if (els.onboarding) els.onboarding.hidden = true;
         els.shell.hidden = false;
         els.search?.focus();
         render();
